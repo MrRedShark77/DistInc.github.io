@@ -215,6 +215,9 @@ function elTick(diff) {
 	player.elementary.fermions.leptons.amount = new ExpantaNum(player.elementary.fermions.leptons.amount).plus(
 		adjustGen(tmp.elm.ferm.leptonGain, "leptons").times(diff)
 	);
+	player.elementary.fermions.hadrons.amount = new ExpantaNum(player.elementary.fermions.hadrons.amount).plus(
+		adjustGen(tmp.elm.ferm.hadronGain, "hadrons").times(diff)
+	);
 	player.elementary.bosons.gauge.amount = new ExpantaNum(player.elementary.bosons.gauge.amount).plus(
 		adjustGen(tmp.elm.bos.gaugeGain, "gauge").times(diff)
 	);

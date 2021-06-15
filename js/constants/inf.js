@@ -1,8 +1,8 @@
 // Infinity
 const INF_UNL = new ExpantaNum(Number.MAX_VALUE).times(DISTANCES.uni);
 const INF_UPGS = {
-	rows: 10,
-	cols: 10,
+	rows: 11,
+	cols: 11,
 	dispReqs: {
 		4: new ExpantaNum(3),
 		5: new ExpantaNum(6),
@@ -33,6 +33,9 @@ const INF_UPGS = {
 		10: function() {
 			return tmp.elm.bos.hasHiggs("4;0;0");
 		},
+		11: function() {
+			return hasMltMilestone(25);
+		},
 	},
 	colReqs: {
 		4: function () {
@@ -55,6 +58,9 @@ const INF_UPGS = {
 		},
 		10: function() {
 			return tmp.elm.bos.hasHiggs("4;0;0");
+		},
+		11: function() {
+			return hasMltMilestone(25);
 		},
 	},
 	costs: {
@@ -158,6 +164,28 @@ const INF_UPGS = {
 		"10;8": new ExpantaNum(1.2e143),
 		"10;9": new ExpantaNum(1e158),
 		"10;10": new ExpantaNum(1.5e161),
+
+		"1;11": new ExpantaNum("1e1.55e6"),
+		"2;11": new ExpantaNum("1e1.65e6"),
+		"3;11": new ExpantaNum(1/0),
+		"4;11": new ExpantaNum(1/0),
+		"5;11": new ExpantaNum(1/0),
+		"6;11": new ExpantaNum(1/0),
+		"7;11": new ExpantaNum(1/0),
+		"8;11": new ExpantaNum(1/0),
+		"9;11": new ExpantaNum(1/0),
+		"10;11": new ExpantaNum(1/0),
+		"11;1": new ExpantaNum("1e1.5e6"),
+		"11;2": new ExpantaNum("1e1.7e6"),
+		"11;3": new ExpantaNum(1/0),
+		"11;4": new ExpantaNum(1/0),
+		"11;5": new ExpantaNum(1/0),
+		"11;6": new ExpantaNum(1/0),
+		"11;7": new ExpantaNum(1/0),
+		"11;8": new ExpantaNum(1/0),
+		"11;9": new ExpantaNum(1/0),
+		"11;10": new ExpantaNum(1/0),
+		"11;11": new ExpantaNum(1/0),
 	},
 	descs: {
 		"1;1": "Ranks & Tiers boost Time Speed.",
@@ -260,6 +288,28 @@ const INF_UPGS = {
 		"10;8": "The Perk Accelerator's boost to Perk Power uses a better formula.",
 		"10;9": "Gravitons are gained 100x as fast.",
 		"10;10": "Dark Flow & Pathogen gain are increased by 90% for every Rank you have & by 750% for every Tier you have.",
+
+		"1;11": "Dark Flow & Pathogen gain are raised by 1.5.",
+		"2;11": "Superscaled Endorsements scaling starts later based on Phantoms.",
+		"3;11": "Placeholder.",
+		"4;11": "Placeholder.",
+		"5;11": "Placeholder.",
+		"6;11": "Placeholder.",
+		"7;11": "Placeholder.",
+		"8;11": "Placeholder.",
+		"9;11": "Placeholder.",
+		"10;11": "Placeholder.",
+		"11;1": "Decreases Tier requirement by 5% for every 500 Rank you have, and decreases Rank requirement by 2.5% for every 10 Tier you have.",
+		"11;2": "inf2;2 effects are overpowered.",
+		"11;3": "Placeholder.",
+		"11;4": "Placeholder.",
+		"11;5": "Placeholder.",
+		"11;6": "Placeholder.",
+		"11;7": "Placeholder.",
+		"11;8": "Placeholder.",
+		"11;9": "Placeholder.",
+		"11;10": "Placeholder.",
+		"11;11": "Placeholder.",
 	},
 	reqs: {
 		"1;2": ["1;1"],
@@ -361,6 +411,28 @@ const INF_UPGS = {
 		"10;8": ["9;9"],
 		"10;9": ["9;9"],
 		"10;10": ["10;9", "9;10"],
+
+		"1;11": ["10;10"],
+		"2;11": ["10;10"],
+		"3;11": ["10;10"],
+		"4;11": ["10;10"],
+		"5;11": ["10;10"],
+		"6;11": ["10;10"],
+		"7;11": ["10;10"],
+		"8;11": ["10;10"],
+		"9;11": ["10;10"],
+		"10;11": ["10;10"],
+		"11;1": ["10;10"],
+		"11;2": ["10;10"],
+		"11;3": ["10;10"],
+		"11;4": ["10;10"],
+		"11;5": ["10;10"],
+		"11;6": ["10;10"],
+		"11;7": ["10;10"],
+		"11;8": ["10;10"],
+		"11;9": ["10;10"],
+		"11;10": ["10;10"],
+		"11;11": ["10;11", "11,10"],
 	},
 	repeals: {
 		"2;2": ["1;2", "2;1"],
@@ -420,6 +492,7 @@ const INF_UPGS = {
 		},
 		"2;2": function () {
 			let ret = tmp.timeSpeed ? tmp.timeSpeed.log10().plus(1) : new ExpantaNum(1);
+			if (tmp.inf) if (tmp.inf.upgs.has("11;2")) ret = tmp.timeSpeed ? ExpantaNum.pow(10, tmp.timeSpeed.log10().plus(1).root(1.4)) : new ExpantaNum(1);
 			if (modeActive('extreme')) ret = ret.div(2).max(1)
 			return ret;
 		},
@@ -708,6 +781,17 @@ const INF_UPGS = {
 				ranks = ranks.times(ranks.div(200).plus(1))
 			}
 			let ret = ExpantaNum.pow(base1, ranks).times(ExpantaNum.pow(base2, tiers))
+			return ret
+		},
+		"11;1": function() {
+			let ret = {}
+			ret.rank = ExpantaNum.pow(1.05,player.tier.div(10).floor())
+			ret.tier = ExpantaNum.pow(1.1,player.rank.div(500).floor())
+			return ret
+		},
+		"2;11": function() {
+			if (!tmp.inf.pantheon) return new ExpantaNum(0)
+			let ret = tmp.inf.pantheon.phantoms.pow(2)
 			return ret
 		},
 	}

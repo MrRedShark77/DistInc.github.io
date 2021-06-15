@@ -27,6 +27,8 @@ function getQuiltStrength(x) {
 	if (x==1) base = player.distance.max(1).logBase(DISTANCES.mlt);
 	else if (x==2) base = player.inf.knowledge.max(1).logBase("1e8500");
 	else if (x==3) base = player.elementary.particles.max(1).logBase(1e150);
+
+	if (x == 2 && hasMltMilestone(26)) base = base.times(tmp.mlt.mil26reward)
 	
 	if (modeActive("easy")) base = base.pow(1.01).times(1.2);
 	if (modeActive("hard")) base = base.div(1.2);

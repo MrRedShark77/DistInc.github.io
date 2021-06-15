@@ -35,6 +35,7 @@ function updatePathogensGain(){
 	if (tmp.inf) if (tmp.inf.upgs.has("10;10")) tmp.pathogens.gain = tmp.pathogens.gain.times(INF_UPGS.effects["10;10"]())
 	if (tmp.fn && modeActive("extreme")) tmp.pathogens.gain = tmp.pathogens.gain.times(tmp.fn.enh.moltBrEff||1)
 	if (player.elementary.foam.unl && tmp.elm) tmp.pathogens.gain = tmp.pathogens.gain.times(tmp.elm.qf.boost24)
+	if (tmp.inf) if (tmp.inf.upgs.has("1;11")) tmp.pathogens.gain = tmp.pathogens.gain.pow(1.5)
 }
 
 function updateTempPathogens() {
@@ -78,6 +79,7 @@ function updateTempPathogens() {
 	if (nerfActive("noPathogenUpgs")) tmp.pathogens.upgPow = new ExpantaNum(0);
 	if (tmp.pathogens.upgPow.gte(10)) tmp.pathogens.upgPow = tmp.pathogens.upgPow.sqrt().times(Math.sqrt(10))
 	if (player.elementary.sky.unl && tmp.elm) tmp.pathogens.upgPow = tmp.pathogens.upgPow.times(tmp.elm.sky.pionEff[2])
+	if (player.achievements.includes(201)) tmp.pathogens.upgPow = tmp.pathogens.upgPow.times(1.25)
 	if (!tmp.pathogens.extra) tmp.pathogens.extra = function (n) {
 		let extra = new ExpantaNum(0);
 		if (tmp.inf) if (tmp.inf.asc) extra = extra.plus(tmp.inf.asc.perkEff(2));

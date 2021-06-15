@@ -137,7 +137,11 @@ const DEFAULT_START = {
 			leptons: {
 				amount: new ExpantaNum(0),
 				type: 1
-			}
+			},
+			hadrons: {
+				amount: new ExpantaNum(0),
+				type: 1
+			},
 		},
 		bosons: {
 			amount: new ExpantaNum(0),

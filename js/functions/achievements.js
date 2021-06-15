@@ -209,6 +209,11 @@ function checkR19Ach() {
 	if (player.distance.gte("2.8e1000000026643")) tmp.ach[198].grant();
 }
 
+function checkR20Ach() {
+	if (player.tier.gte(166)) tmp.ach[201].grant();
+	if (player.distance.gte("2.8e420000026643") && player.inf.derivatives.unlocks.lte(0)) tmp.ach[202].grant();
+}
+
 function updateAchievements() {
 	tmp.nopathogenupgs = getTotalPathogenUpgrades().eq(0)
 	for (let r=1;r<=ACH_DATA.rows;r++) if (!Achievement.hasRow(r)) window["checkR"+r+"Ach"]();

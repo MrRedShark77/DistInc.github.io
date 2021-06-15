@@ -12,6 +12,8 @@ const MLT_TABS = {
 
 const MULIVERSE_ENERGY_BASE = 2;
 
+const MLT_ENERGY_SS = new ExpantaNum(1e14)
+
 const MULTIVERSES = 5;
 
 const MLT_DATA = {
@@ -50,7 +52,7 @@ const MLT_DATA = {
 	},
 }
 
-const MLT_MILESTONE_NUM = 24;
+const MLT_MILESTONE_NUM = 27;
 
 const MLT_MILESTONES = [
 	{
@@ -160,6 +162,17 @@ const MLT_MILESTONES = [
 		desc: "Entropy Upgrades cost less based on your Total Multiversal Energy.",
 		effect: function() { return player.mlt.totalEnergy.plus(1).log10().plus(1).root(5) },
 		effectDesc: function() { return "Currently: /"+showNum(tmp.mlt.mil24reward) },
+	}, {
+		req: new ExpantaNum(1e10),
+		desc: "Unlock 1 new row & column of Infinity Upgrades.",
+	}, {
+		req: new ExpantaNum(1e11),
+		desc: "Quilt Strength from The Multiversal Quilt II is increased by 15% for every OoM^2 of distance.",
+		effect: function() { return ExpantaNum.pow(1.15,player.distance.max(1).log10().max(1).log10()) },
+		effectDesc: function() { return "Currently: x"+showNum(tmp.mlt.mil26reward) },
+	}, {
+		req: new ExpantaNum(1e13),
+		desc: "Unlock third types of Fermions.",
 	},
 ]
 

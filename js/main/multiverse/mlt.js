@@ -15,6 +15,7 @@ function updateMiscMltStuff() {
 	tmp.mlt.mil20reward = MLT_MILESTONES[19].effect(); // Milestone 20
 	tmp.mlt.mil22reward = MLT_MILESTONES[21].effect(); // Milestone 22
 	tmp.mlt.mil24reward = MLT_MILESTONES[23].effect(); // Milestone 24
+	tmp.mlt.mil26reward = MLT_MILESTONES[25].effect(); // Milestone 26
 	tmp.mlt.mlt1reward = MLT_DATA[1].effect(); // Multiverse 1
 }
 
@@ -77,6 +78,7 @@ function setMultiverseResetFunction() {
 
 function updateMultiverseLayer() {
 	tmp.mlt.can = player.distance.gte(DISTANCES.mlt)
+	tmp.mlt.softcap = MLT_ENERGY_SS
 	if (!tmp.mlt.gain) tmp.mlt.gain = function() { 
 		if (player.distance.lt(DISTANCES.mlt)) return new ExpantaNum(0);
 		let exp = player.distance.logBase(DISTANCES.mlt).sub(1);
@@ -84,6 +86,11 @@ function updateMultiverseLayer() {
 		let gain = ExpantaNum.pow(2, exp).times(ExpantaNum.pow(MULIVERSE_ENERGY_BASE, player.mlt.active)).times(tmp.ach[193].has?1.05:1).times(modeActive("easy")?1.5:1)
 		if (modeActive("hard") && gain.gte(1.5)) gain = gain.div(1.5);
 		if (tmp.ach[185].has && modeActive("extreme")) gain = gain.times(1.2);
+		if (player.achievements.includes(202)) gain = gain.times(42)
+
+		let exp_s = 1/4
+		if (gain.gte(tmp.mlt.softcap)) gain = gain.pow(exp_s).times(ExpantaNum.pow(tmp.mlt.softcap, ExpantaNum.sub(1, exp_s)))
+
 		return gain.floor();
 	}
 	tmp.mlt.layer = new Layer("multiverse", tmp.mlt.can, "normal", true, "mlt", true)

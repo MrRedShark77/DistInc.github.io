@@ -108,6 +108,8 @@ function updateTempInfUpgs() {
 				"x"
 			);
 		else if (id=="5;10") return "Pathogens: "+showNum(INF_UPGS.effects[id]().pth)+"x, Higgs Bosons: "+showNum(INF_UPGS.effects[id]().hb)+"x"
+		else if (id=="11;1") return "/"+showNum(INF_UPGS.effects[id]().tier)+" to Tier, /"+showNum(INF_UPGS.effects[id]().rank)+" to Rank"
+		else if (id=="2;11") return showNum(INF_UPGS.effects[id]())+" later"
 		return showNum(INF_UPGS.effects[id]()) + "x";
 	};
 	if (!tmp.inf.upgs.hover) tmp.inf.upgs.hover = function (id) {

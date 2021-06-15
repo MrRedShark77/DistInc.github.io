@@ -976,6 +976,19 @@ function updateLeptonsHTML(){
 	);
 }
 
+function updateHadronsHTML(){
+	tmp.el.hadronUnl.changeStyle("visibility", (hasMltMilestone(27)?"visible":"hidden"))
+	tmp.el.hadrons.setHTML(
+		showNum(player.elementary.fermions.hadrons.amount) + " " + tmp.elm.ferm.hadronName() + " Hadrons"
+	);
+	tmp.el.hadronGain.setTxt(showNum(adjustGen(tmp.elm.ferm.hadronGain, "heptons")));
+	tmp.el.hadronRewards.setTooltip(
+		tmp.elm.ferm.hadronName(true) +
+			" Hadrons: " +
+			tmp.elm.ferm.hadronDesc(HADRON_NAMES[player.elementary.fermions.hadrons.type - 1])
+	);
+}
+
 function updateBosonsAmountsHTML(){
 	tmp.el.bosonsamt.setTxt(showNum(player.elementary.bosons.amount));
 	tmp.el.transfer1Bosons.setClasses({
@@ -1236,6 +1249,7 @@ function updateFermionsMainHTML(){
 		updateFermionsHTML()
 		updateQuarksHTML()
 		updateLeptonsHTML()
+		updateHadronsHTML()
 	}
 }
 
@@ -1562,7 +1576,7 @@ function updateOverallMultiverseHTML() {
 		tmp.el.mltReset.setHTML(
 			(player.mlt.times.eq(0)?("You have travelled across the entire multiverse, you must move on."):("Obliterate the multiverse to create <span class='mlttxt'>" +
 			showNum(tmp.mlt.layer.gain) +
-			"</span> Multiversal Energy."))
+			"</span> Multiversal Energy." + (tmp.mlt.layer.gain.gte(tmp.mlt.softcap)?" <span class='sc'>(softcapped)</span>":"")))
 		);
 	}
 	if (player.tab == "mlt") {

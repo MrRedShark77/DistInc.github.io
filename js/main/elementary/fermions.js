@@ -1,7 +1,8 @@
 function updateTempQuarks() {
 	tmp.elm.ferm.quarkGain = player.elementary.fermions.amount
 		.times(player.inf.endorsements.plus(1).sqrt())
-		.times((tmp.psiEff ? tmp.psiEff : new ExpantaNum(0)).max(1));
+		.times((tmp.psiEff ? tmp.psiEff : new ExpantaNum(0)).max(1))
+		.pow((tmp.elm.ferm.hadronR ? tmp.elm.ferm.hadronR("meson") : new ExpantaNum(0)).max(1));
 	if (tmp.glu2) tmp.elm.ferm.quarkGain = tmp.elm.ferm.quarkGain.times(tmp.glu2.max(1));
 	if (tmp.higgs031) tmp.elm.ferm.quarkGain = tmp.elm.ferm.quarkGain.times(tmp.higgs031)
 	if (player.elementary.theory.supersymmetry.unl) tmp.elm.ferm.quarkGain = tmp.elm.ferm.quarkGain.times(tmp.sqEff||1)
@@ -54,6 +55,7 @@ function updateTempLeptons() {
 		.times(tmp.inf.pantheon.totalGems.plus(1))
 		.div(2.5)
 		.times(tmp.elm.ferm.quarkR("top").max(1))
+		.pow((tmp.elm.ferm.hadronR ? tmp.elm.ferm.hadronR("meson") : new ExpantaNum(0)).max(1))
 		.max(0);
 	if (tmp.glu2) tmp.elm.ferm.leptonGain = tmp.elm.ferm.leptonGain.times(tmp.glu2.max(1));
 	if (tmp.higgs031) tmp.elm.ferm.leptonGain = tmp.elm.ferm.leptonGain.times(tmp.higgs031.max(1));
@@ -111,6 +113,47 @@ function updateTempLeptons() {
 	};
 }
 
+function updateTempHadrons() {
+	tmp.elm.ferm.hadronGain = player.elementary.fermions.leptons.amount.max(1).log10().add(1)
+		.times(player.elementary.fermions.quarks.amount.max(1).log10().add(1))
+		.pow(0.33)
+		.times((tmp.elm.ferm.hadronR ? tmp.elm.ferm.hadronR("baryon") : new ExpantaNum(0)).max(1))
+		.max(0);
+	if (!hasMltMilestone(27)) tmp.elm.ferm.hadronGain = new ExpantaNum(0)
+	tmp.elm.ferm.hadronRewards = new ExpantaNum(player.elementary.fermions.hadrons.amount).max(1).logBase(10000).floor();
+	if (!tmp.elm.ferm.hadronName) tmp.elm.ferm.hadronName = function (noExp = false) {
+		let name = HADRON_NAMES[player.elementary.fermions.hadrons.type - 1];
+		let stacks = tmp.elm.ferm.hadronRewards
+		return capitalFirst(name) + (noExp ? "" : stacks.gt(1) ? "<sup>" + showNum(stacks) + "</sup>" : "");
+	};
+	tmp.elm.ferm.hadronEff = function (name) {
+		let hpts = player.elementary.fermions.hadrons.amount;
+		let stacks = tmp.elm.ferm.hadronRewards
+		if (stacks.gte(8)) stacks = stacks.sqrt().times(Math.sqrt(8));
+		if (name == "meson") return hpts.max(1).logBase(10).max(1).logBase(ExpantaNum.mul(1e6, ExpantaNum.pow(0.9, stacks.max(1).sub(1)))).add(1)
+		else if (name == "baryon") return hpts.max(1).logBase(10)
+			.times(player.elementary.fermions.quarks.amount.max(1).log10().add(1).log10().add(1))
+			.times(player.elementary.fermions.leptons.amount.max(1).log10().add(1).log10().add(1))
+			.pow(stacks.max(1).log10().add(1))
+			.add(1)
+		return hpts
+	};
+	if (!tmp.elm.ferm.hadronR) tmp.elm.ferm.hadronR = function (name) {
+		if ((name == HADRON_NAMES[player.elementary.fermions.hadrons.type - 1])) return tmp.elm.ferm.hadronEff(name);
+		else return new ExpantaNum(1);
+	};
+	if (!tmp.elm.ferm.hadronDesc) tmp.elm.ferm.hadronDesc = function (name) {
+		let desc = HADRON_DESCS[name] + "      Currently: ";
+		let eff = tmp.elm.ferm.hadronEff(name);
+		if (name == "meson") desc += "^" + showNum(eff);
+		else desc += showNum(eff) + "x";
+		return desc;
+	};
+	if (!tmp.elm.ferm.changeHadron) tmp.elm.ferm.changeHadron = function () {
+		player.elementary.fermions.hadrons.type = (player.elementary.fermions.hadrons.type % 2) + 1;
+	};
+}
+
 function updateTempFermions() {
 	if (!tmp.elm.ferm) tmp.elm.ferm = {};
 	if (!tmp.elm.ferm.transfer1) tmp.elm.ferm.transfer1 = function () {
@@ -127,4 +170,5 @@ function updateTempFermions() {
 	
 	updateTempQuarks();
 	updateTempLeptons();
+	updateTempHadrons();
 }

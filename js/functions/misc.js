@@ -59,6 +59,7 @@ function ENString(obj) {
 	ret.elementary.fermions.amount = new ExpantaNum(ret.elementary.fermions.amount).toString();
 	ret.elementary.fermions.quarks.amount = new ExpantaNum(ret.elementary.fermions.quarks.amount).toString();
 	ret.elementary.fermions.leptons.amount = new ExpantaNum(ret.elementary.fermions.leptons.amount).toString();
+	ret.elementary.fermions.hadrons.amount = new ExpantaNum(ret.elementary.fermions.hadrons.amount).toString();
 	ret.elementary.bosons.amount = new ExpantaNum(ret.elementary.bosons.amount).toString();
 	ret.elementary.bosons.gauge.amount = new ExpantaNum(ret.elementary.bosons.gauge.amount).toString();
 	ret.elementary.bosons.gauge.force = new ExpantaNum(ret.elementary.bosons.gauge.force).toString();
@@ -180,6 +181,7 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	if (ret.version < 1.9 || !ret.elementary.sky) ret.elementary.sky = deepCopy(sc.elementary.sky);
 	if (ret.version < 2.0 || !ret.mlt) ret.mlt = deepCopy(sc.mlt);
 	if (ret.version < sc.version) onVersionChange();
+	if (ret.elementary.fermions.hadrons === undefined) ret.elementary.fermions.hadrons = deepCopy(sc.elementary.fermions.hadrons)
 	if (ret.elementary.theory.tree.spent === undefined) ret.elementary.theory.tree.spent = deepCopy(sc.elementary.theory.tree.spent)
 	if (ret.elementary.theory.inflatons === undefined) ret.elementary.theory.inflatons = deepCopy(sc.elementary.theory.inflatons)
 	if (ret.autoModes === undefined) ret.autoModes = {};
@@ -243,6 +245,7 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	ret.elementary.fermions.amount = new ExpantaNum(ret.elementary.fermions.amount);
 	ret.elementary.fermions.quarks.amount = new ExpantaNum(ret.elementary.fermions.quarks.amount);
 	ret.elementary.fermions.leptons.amount = new ExpantaNum(ret.elementary.fermions.leptons.amount);
+	ret.elementary.fermions.hadrons.amount = new ExpantaNum(ret.elementary.fermions.hadrons.amount);
 	ret.elementary.bosons.amount = new ExpantaNum(ret.elementary.bosons.amount);
 	ret.elementary.bosons.gauge.amount = new ExpantaNum(ret.elementary.bosons.gauge.amount);
 	ret.elementary.bosons.gauge.force = new ExpantaNum(ret.elementary.bosons.gauge.force);

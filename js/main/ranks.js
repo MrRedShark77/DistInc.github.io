@@ -1,11 +1,18 @@
+function getRankDiv() {
+	let ret = new ExpantaNum(1)
+	if (player.inf.upgrades.includes("11;1")) ret = ret.mul(INF_UPGS.effects["11;1"]().rank)
+	return ret
+}
+
 function updateTempRanks() {
 	if (!tmp.ranks) tmp.ranks = {};
+	let div = getRankDiv()
 	let fp = getRankFP()
 	let bc = getRankBaseCost()
 	tmp.ranks.req = new ExpantaNum(bc).times(
-		ExpantaNum.pow(2, player.rank.div(fp).max(1).sub(1).pow(2))
+		ExpantaNum.pow(2, player.rank.div(fp).div(getRankDiv()).max(1).sub(1).pow(2))
 	);
-	tmp.ranks.bulk = player.distance.div(bc).max(1).logBase(2).sqrt().plus(1).times(fp).plus(1).round();
+	tmp.ranks.bulk = player.distance.div(bc).max(1).logBase(2).sqrt().plus(1).times(fp).times(getRankDiv()).plus(1).round();
 	if (scalingActive("rank", player.rank.max(tmp.ranks.bulk), "scaled")) {
 		let start = getScalingStart("scaled", "rank");
 		let power = getScalingPower("scaled", "rank");
@@ -17,6 +24,7 @@ function updateTempRanks() {
 					.pow(exp)
 					.div(start.pow(exp.sub(1)))
 					.div(fp)
+					.div(getRankDiv())
 					.sub(1)
 					.pow(2)
 			)
@@ -28,6 +36,7 @@ function updateTempRanks() {
 			.sqrt()
 			.plus(1)
 			.times(fp)
+			.times(getRankDiv())
 			.times(start.pow(exp.sub(1)))
 			.pow(exp.pow(-1))
 			.plus(1)
@@ -49,6 +58,7 @@ function updateTempRanks() {
 					.pow(exp)
 					.div(start.pow(exp.sub(1)))
 					.div(fp)
+					.div(getRankDiv())
 					.sub(1)
 					.pow(2)
 			)
@@ -60,6 +70,7 @@ function updateTempRanks() {
 			.sqrt()
 			.plus(1)
 			.times(fp)
+			.times(getRankDiv())
 			.times(start.pow(exp.sub(1)))
 			.pow(exp.pow(-1))
 			.times(start2.pow(exp2.sub(1)))
@@ -87,6 +98,7 @@ function updateTempRanks() {
 					.pow(exp)
 					.div(start.pow(exp.sub(1)))
 					.div(fp)
+					.div(getRankDiv())
 					.sub(1)
 					.pow(2)
 			)
@@ -98,6 +110,7 @@ function updateTempRanks() {
 			.sqrt()
 			.plus(1)
 			.times(fp)
+			.times(getRankDiv())
 			.times(start.pow(exp.sub(1)))
 			.pow(exp.pow(-1))
 			.times(start2.pow(exp2.sub(1)))
@@ -138,6 +151,7 @@ function updateTempRanks() {
 					.pow(exp)
 					.div(start.pow(exp.sub(1)))
 					.div(fp)
+					.div(getRankDiv())
 					.sub(1)
 					.pow(2)
 			)
@@ -149,6 +163,7 @@ function updateTempRanks() {
 			.sqrt()
 			.plus(1)
 			.times(fp)
+			.times(getRankDiv())
 			.times(start.pow(exp.sub(1)))
 			.pow(exp.pow(-1))
 			.times(start2.pow(exp2.sub(1)))
