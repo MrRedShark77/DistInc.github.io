@@ -167,8 +167,8 @@ const INF_UPGS = {
 
 		"1;11": new ExpantaNum("1e1.55e6"),
 		"2;11": new ExpantaNum("1e1.65e6"),
-		"3;11": new ExpantaNum(1/0),
-		"4;11": new ExpantaNum(1/0),
+		"3;11": new ExpantaNum('e7.5e7'),
+		"4;11": new ExpantaNum('e1.35e8'),
 		"5;11": new ExpantaNum(1/0),
 		"6;11": new ExpantaNum(1/0),
 		"7;11": new ExpantaNum(1/0),
@@ -177,9 +177,9 @@ const INF_UPGS = {
 		"10;11": new ExpantaNum(1/0),
 		"11;1": new ExpantaNum("1e1.5e6"),
 		"11;2": new ExpantaNum("1e1.7e6"),
-		"11;3": new ExpantaNum(1/0),
-		"11;4": new ExpantaNum(1/0),
-		"11;5": new ExpantaNum(1/0),
+		"11;3": new ExpantaNum("e7e7"),
+		"11;4": new ExpantaNum('e1.45e8'),
+		"11;5": new ExpantaNum('e1.5e8'),
 		"11;6": new ExpantaNum(1/0),
 		"11;7": new ExpantaNum(1/0),
 		"11;8": new ExpantaNum(1/0),
@@ -291,8 +291,8 @@ const INF_UPGS = {
 
 		"1;11": "Dark Flow & Pathogen gain are raised by 1.5.",
 		"2;11": "Superscaled Endorsements scaling starts later based on Phantoms.",
-		"3;11": "Placeholder.",
-		"4;11": "Placeholder.",
+		"3;11": "The generation of all Foam types is raised based on &Omega; Particles.",
+		"4;11": "Total Multiversal Energy boosts Elementary Particles gain.",
 		"5;11": "Placeholder.",
 		"6;11": "Placeholder.",
 		"7;11": "Placeholder.",
@@ -301,9 +301,9 @@ const INF_UPGS = {
 		"10;11": "Placeholder.",
 		"11;1": "Decreases Tier requirement by 5% for every 500 Rank you have, and decreases Rank requirement by 2.5% for every 10 Tier you have.",
 		"11;2": "inf2;2 effects are overpowered.",
-		"11;3": "Placeholder.",
-		"11;4": "Placeholder.",
-		"11;5": "Placeholder.",
+		"11;3": "Hadrons from Fermions gain are affected by Time Speed at a reduced time.",
+		"11;4": "Scaled & Superscaled Spectral Gems, Derivative Boosts scaling are 50% weaker.",
+		"11;5": "Endorsements effect of knowledge gain be raised by 100.",
 		"11;6": "Placeholder.",
 		"11;7": "Placeholder.",
 		"11;8": "Placeholder.",
@@ -792,6 +792,20 @@ const INF_UPGS = {
 		"2;11": function() {
 			if (!tmp.inf.pantheon) return new ExpantaNum(0)
 			let ret = tmp.inf.pantheon.phantoms.pow(2)
+			return ret
+		},
+		"3;11": function() {
+			if (!tmp.elm.entropy) return new ExpantaNum(0)
+			let ret = tmp.elm.entropy.omega.add(1).pow(0.1)
+			return ret
+		},
+		"4;11": function() {
+			let ret = player.mlt.totalEnergy.add(1).pow(2)
+			return ret
+		},
+		"11;3": function() {
+			if (!tmp.timeSpeed) return new ExpantaNum(1)
+			let ret = tmp.timeSpeed.add(1).log10().add(1).log10().add(1).pow(2)
 			return ret
 		},
 	}

@@ -119,6 +119,7 @@ function updateTempHadrons() {
 		.pow(0.33)
 		.times((tmp.elm.ferm.hadronR ? tmp.elm.ferm.hadronR("baryon") : new ExpantaNum(0)).max(1))
 		.max(0);
+	if (tmp.inf) if (tmp.inf.upgs.has("11;3")) tmp.elm.ferm.hadronGain = tmp.elm.ferm.hadronGain.times(INF_UPGS.effects["11;3"]())
 	if (!hasMltMilestone(27)) tmp.elm.ferm.hadronGain = new ExpantaNum(0)
 	tmp.elm.ferm.hadronRewards = new ExpantaNum(player.elementary.fermions.hadrons.amount).max(1).logBase(10000).floor();
 	if (!tmp.elm.ferm.hadronName) tmp.elm.ferm.hadronName = function (noExp = false) {
@@ -130,7 +131,7 @@ function updateTempHadrons() {
 		let hpts = player.elementary.fermions.hadrons.amount;
 		let stacks = tmp.elm.ferm.hadronRewards
 		if (stacks.gte(8)) stacks = stacks.sqrt().times(Math.sqrt(8));
-		if (name == "meson") return hpts.max(1).logBase(10).max(1).logBase(ExpantaNum.mul(1e6, ExpantaNum.pow(0.9, stacks.max(1).sub(1)))).add(1)
+		if (name == "meson") return hpts.max(1).logBase(10).max(1).logBase(ExpantaNum.mul(1e6, ExpantaNum.pow(0.9, stacks.max(1).sub(1).pow(0.5)))).add(1)
 		else if (name == "baryon") return hpts.max(1).logBase(10)
 			.times(player.elementary.fermions.quarks.amount.max(1).log10().add(1).log10().add(1))
 			.times(player.elementary.fermions.leptons.amount.max(1).log10().add(1).log10().add(1))

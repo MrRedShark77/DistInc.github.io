@@ -128,6 +128,7 @@ function gameLoop(diff) {
 		tickWithoutTS(diff);
 		tickWithTS(diff.times(nerfActive("noTS") ? 1 : tmp.timeSpeed));
 	}
+	if (player.automators["multiversal_quilt"] && hasMltMilestone(28) && player.mlt.times.gte(1)) maxQuilt()
 	updateAfterTick();
 	if (updating) {
 		updating = false

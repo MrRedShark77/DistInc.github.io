@@ -68,9 +68,11 @@ function getQuilt3Eff2() {
 	return ExpantaNum.pow(1e5, power);
 }
 
+function getQuiltCostBase() { return hasMltMilestone(28)?tmp.mlt.mil28reward:2 }
+
 function getQuiltUpgCost(x) {
 	let bought = player.mlt.quiltUpgs[x-1]
-	return ExpantaNum.pow(2, bought)
+	return ExpantaNum.pow(getQuiltCostBase(), bought)
 }
 
 function buyQuiltUpg(x) {
@@ -78,4 +80,14 @@ function buyQuiltUpg(x) {
 	if (player.mlt.energy.lt(cost)) return;
 	player.mlt.energy = player.mlt.energy.sub(cost);
 	player.mlt.quiltUpgs[x-1] = player.mlt.quiltUpgs[x-1].plus(1);
+}
+
+function maxQuilt() {
+	for (let x = 1; x <= 3; x++) if (player.mlt.energy.gte(getQuiltUpgCost(x))) {
+		let base = getQuiltCostBase()
+		let bulk = player.mlt.energy.max(1).logBase(base).floor()
+		let cost = ExpantaNum.pow(base, bulk)
+		player.mlt.energy = player.mlt.energy.sub(cost)
+		player.mlt.quiltUpgs[x-1] = bulk.add(1)
+	}
 }

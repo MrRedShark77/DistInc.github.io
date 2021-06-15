@@ -168,7 +168,15 @@ function getScalingPower(type, name) {
 		if (type=="scaled") {
 			if (tmp.pathogens) power = power.times(ExpantaNum.sub(1, tmp.pathogens[15].eff()))
 		}
-	}
+	} else if (name=="spectralGems") {
+		if (type=="superscaled" || type=="scaled") {
+			if (tmp.inf) if (tmp.inf.upgs.has("11;4")) power = power.times(0.5)
+		}
+	} else if (name=="dervBoost") {
+		if (type=="superscaled" || type=="scaled") {
+			if (tmp.inf) if (tmp.inf.upgs.has("11;4")) power = power.times(0.5)
+		}
+	} 
 	if (type=="hyper"&&name!="darkCore") power = power.max(0.5)
 	return power
 }

@@ -175,8 +175,8 @@ const ACH_DATA = {
 
 		201: "Tier is OP",
 		202: "Non-Dimensional Distance",
-		203: "Placeholder",
-		204: "Placeholder",
+		203: "Ow, Infinity!",
+		204: "Go to Megaverse?",
 		205: "Placeholder",
 		206: "Placeholder",
 		207: "Placeholder",
@@ -356,8 +356,8 @@ const ACH_DATA = {
 
 		201: "Reach Tier showNum(166).",
 		202: "Reach formatDistance(2.8e420000026643) without Derivatives unlocked.",
-		203: "Placeholder",
-		204: "Placeholder",
+		203: "Reach formatDistance(4.4e4500000026) while in Reality.",
+		204: "Gain showNum(1e15) Multiversal Energy in one reset.",
 		205: "Placeholder",
 		206: "Placeholder",
 		207: "Placeholder",
@@ -481,5 +481,6 @@ const ACH_DATA = {
 
 		201: "Pathogen Upgrades are x1.25 stronger.",
 		202: "Gain showNum(42)x more Multiversal Energy.",
+		203: "Knowledge gain are raised by 1.5.",
 	}
 };

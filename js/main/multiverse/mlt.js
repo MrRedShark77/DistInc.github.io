@@ -16,6 +16,7 @@ function updateMiscMltStuff() {
 	tmp.mlt.mil22reward = MLT_MILESTONES[21].effect(); // Milestone 22
 	tmp.mlt.mil24reward = MLT_MILESTONES[23].effect(); // Milestone 24
 	tmp.mlt.mil26reward = MLT_MILESTONES[25].effect(); // Milestone 26
+	tmp.mlt.mil28reward = MLT_MILESTONES[27].effect(); // Milestone 28
 	tmp.mlt.mlt1reward = MLT_DATA[1].effect(); // Multiverse 1
 }
 
@@ -98,6 +99,7 @@ function updateMultiverseLayer() {
 		if (!auto && !player.options.mltnc) if (!confirm("Are you sure you want to do this? It will take some time for you to get back here!")) return "NO";
 		if (tmp.mlt.layer.gain.gte(1e6)) tmp.ach[195].grant();
 		if (tmp.mlt.layer.gain.gte(1e9)) tmp.ach[197].grant();
+		if (tmp.mlt.layer.gain.gte(1e15)) tmp.ach[204].grant();
 		player.mlt.energy = player.mlt.energy.plus(tmp.mlt.layer.gain);
 		player.mlt.totalEnergy = player.mlt.totalEnergy.plus(tmp.mlt.layer.gain);
 		player.mlt.highestCompleted = Math.max(player.mlt.highestCompleted, player.mlt.active);

@@ -52,7 +52,7 @@ const MLT_DATA = {
 	},
 }
 
-const MLT_MILESTONE_NUM = 27;
+const MLT_MILESTONE_NUM = 28;
 
 const MLT_MILESTONES = [
 	{
@@ -173,6 +173,11 @@ const MLT_MILESTONES = [
 	}, {
 		req: new ExpantaNum(1e13),
 		desc: "Unlock third types of Fermions.",
+	}, {
+		req: new ExpantaNum(1e15),
+		desc: "Unlock Auto-Multiversal Quilt, make cost from Multiversal Quilts are weaker based on total Multiversal Energy.",
+		effect: function() { return ExpantaNum.pow(0.99, player.mlt.totalEnergy.add(1).log10()).times(2).max(1.15) },
+		effectDesc: function() { return "Currently: x2 -> x"+showNum(tmp.mlt.mil28reward) },
 	},
 ]
 

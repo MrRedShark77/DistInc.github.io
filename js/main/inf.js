@@ -79,7 +79,7 @@ function updateTempInfUpgs() {
 				showNum(INF_UPGS.effects[id]()["flow"]) +
 				"x"
 			);
-		else if (id == "1;8" || id == "7;4" || id == "7;5") return "^" + showNum(INF_UPGS.effects[id]());
+		else if (id == "1;8" || id == "7;4" || id == "7;5" || id == "3;11") return "^" + showNum(INF_UPGS.effects[id]());
 		else if (id == "7;7")
 			return (
 				"Accelerational Energy: " +
@@ -167,6 +167,7 @@ function calcKnowledgeGain(){
 	if (tmp.inf.upgs.has("2;8")) tmp.inf.knowledgeBase = tmp.inf.knowledgeBase.times(INF_UPGS.effects["2;8"]());
 	if (tmp.inf.upgs.has("2;10")) tmp.inf.knowledgeBase = tmp.inf.knowledgeBase.times(3)
 	if (ExpantaNum.gte(player.elementary.theory.tree.upgrades[42]||0, 1) && hasDE(6)) tmp.inf.knowledgeBase = tmp.inf.knowledgeBase.times(TREE_UPGS[42].effect(player.elementary.theory.tree.upgrades[42]||0))
+	if (tmp.inf.upgs.has("11;5")) tmp.inf.knowledgeBase = tmp.inf.knowledgeBase.pow(100)
 	tmp.inf.knowledgeExp = new ExpantaNum(1);
 	if (tmp.inf.upgs.has("1;7")) tmp.inf.knowledgeExp = tmp.inf.knowledgeExp.times(1.25);
 	if (tmp.inf.upgs.has("2;10")) tmp.inf.knowledgeExp = tmp.inf.knowledgeExp.times(1.15);
@@ -196,6 +197,7 @@ function calcKnowledgeGain(){
 	if (modeActive('easy')) tmp.inf.knowledgeGain = tmp.inf.knowledgeGain.times(5)
 	if (modeActive("hard") && tmp.fn) tmp.inf.knowledgeGain = tmp.inf.knowledgeGain.times(tmp.fn.enh.moltBrEff2)
 	if (modeActive("hikers_dream") && player.elementary.bosons.scalar.higgs.upgrades.includes("2;2;1")) tmp.inf.knowledgeGain = tmp.inf.knowledgeGain.times(player.energy)
+	if (tmp.ach[203].has) tmp.inf.knowledgeGain = tmp.inf.knowledgeGain.pow(1.5)
 }
 
 function updateTempInfLayer() {
