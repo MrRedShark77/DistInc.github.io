@@ -283,6 +283,7 @@ function setupHTML() {
 	
 	// Multiverse Stuff
 	setupMltMilestoneTable()
+	for (let x = 1; x <= 3; x++) setupCompsMilestoneTable(x)
 	
 	// Version
 	let v = new Element("version")

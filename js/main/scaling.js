@@ -176,7 +176,11 @@ function getScalingPower(type, name) {
 		if (type=="superscaled" || type=="scaled") {
 			if (tmp.inf) if (tmp.inf.upgs.has("11;4")) power = power.times(0.5)
 		}
-	} 
+	} else if (name=="photons") {
+		if (type == 'scaled') {
+			if (hasCompsMilestone(3,1)) power = power.times(0.1)
+		}
+	}
 	if (type=="hyper"&&name!="darkCore") power = power.max(0.5)
 	return power
 }

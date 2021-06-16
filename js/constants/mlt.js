@@ -8,6 +8,9 @@ const MLT_TABS = {
 	quilts: function() {
 		return true;
 	},
+	compressors: function() {
+		return hasMltMilestone(30);
+	},
 };
 
 const MULIVERSE_ENERGY_BASE = 2;
@@ -52,7 +55,7 @@ const MLT_DATA = {
 	},
 }
 
-const MLT_MILESTONE_NUM = 28;
+const MLT_MILESTONE_NUM = 30;
 
 const MLT_MILESTONES = [
 	{
@@ -178,6 +181,12 @@ const MLT_MILESTONES = [
 		desc: "Unlock Auto-Multiversal Quilt, make cost from Multiversal Quilts are weaker based on total Multiversal Energy.",
 		effect: function() { return ExpantaNum.pow(0.99, player.mlt.totalEnergy.add(1).log10()).times(2).max(1.15) },
 		effectDesc: function() { return "Currently: x2 -> x"+showNum(tmp.mlt.mil28reward) },
+	}, {
+		req: new ExpantaNum(1e16),
+		desc: "Multiversal Quilts no longer spent Multiversal Energy.",
+	}, {
+		req: new ExpantaNum(1e17),
+		desc: "Unlock Multiversal Compressors.",
 	},
 ]
 

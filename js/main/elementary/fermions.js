@@ -114,12 +114,13 @@ function updateTempLeptons() {
 }
 
 function updateTempHadrons() {
-	tmp.elm.ferm.hadronGain = player.elementary.fermions.leptons.amount.max(1).log10().add(1)
+	tmp.elm.ferm.hadronGain = (player.elementary.fermions.leptons.amount.max(1).log10().add(1))
 		.times(player.elementary.fermions.quarks.amount.max(1).log10().add(1))
-		.pow(0.33)
+		.pow(player.inf.upgrades.includes('5;11')?0.75:0.33)
 		.times((tmp.elm.ferm.hadronR ? tmp.elm.ferm.hadronR("baryon") : new ExpantaNum(0)).max(1))
 		.max(0);
 	if (tmp.inf) if (tmp.inf.upgs.has("11;3")) tmp.elm.ferm.hadronGain = tmp.elm.ferm.hadronGain.times(INF_UPGS.effects["11;3"]())
+	if (hasCompsMilestone(3,2)) tmp.elm.ferm.hadronGain = tmp.elm.ferm.hadronGain.times(MLT_COMPS_MIL[3][1].effect())
 	if (!hasMltMilestone(27)) tmp.elm.ferm.hadronGain = new ExpantaNum(0)
 	tmp.elm.ferm.hadronRewards = new ExpantaNum(player.elementary.fermions.hadrons.amount).max(1).logBase(10000).floor();
 	if (!tmp.elm.ferm.hadronName) tmp.elm.ferm.hadronName = function (noExp = false) {

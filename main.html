@@ -35,6 +35,11 @@
 							Quilts
 						</button>
 					</td>
+					<td>
+						<button id="compressorstabbtn" class="btn tb mlt main" onclick="tmp.mlt.showTab('compressors')">
+							Compressors
+						</button>
+					</td>
 				</tr>
 			</table><br>
 		</div>
@@ -81,6 +86,31 @@
 					<div>Increases Quark & Lepton exponents and Gauge Speed's efficiency by <span id="quilt3Eff" class="mlttxt"></span>%<span id="quilt3sc" class="sc dark"></span></div><br>
 					<div>Also multiplies Gauge Speed, Higgs Boson gain, & Hadron gain by <span id="quilt3Eff2" class="mlttxt"></span></div><br><br>
 					<button id="quiltUpg3" class="btn locked" onclick="buyQuiltUpg(3)"></button>
+				</div>
+			</div>
+		</div>
+		<div id="compressors" class="mlttab">
+			<div>Multiversal Compressors: <span id='compressorsValue' style="font-size: 25px;"></span> (+1 next at <span id='compressorsNext' style="font-size: 25px;"></span> Total Multiversal Energy)</div>
+			<div>Have <span id='unspentComps' style="font-size: 25px;"></span> unspent Multiversal Compressors.</div>
+			<br><br>
+			<div class="flexRow">
+				<div class="flexContainer" style="background-color: rgba(183, 0, 255, 0.4); width: 33%; min-height: 400px;">
+					<div class="mltMinorTitle">Multiversal Compressors I: <span id="compressors1"></span></div>
+					<div>Makes Multiversal Quilt I is <span id="compressors1eff" class="mlttxt"></span>% stronger.</div><br><br>
+					<button id="compsGet1" class="btn locked" onclick="getCompressors(1)">Get Multiversal Compressors I</button><br><br>
+					<div id="comps1MilestoneTable"></div>
+				</div>
+				<div class="flexContainer" style="background-color: rgba(255, 183, 0, 0.4); width: 33%; min-height: 400px;">
+					<div class="mltMinorTitle">Multiversal Compressors II: <span id="compressors2"></span></div>
+					<div>Makes Multiversal Quilt II is <span id="compressors2eff" class="mlttxt"></span>% stronger.</div><br><br>
+					<button id="compsGet2" class="btn locked" onclick="getCompressors(2)">Get Multiversal Compressors II</button><br><br>
+					<div id="comps2MilestoneTable"></div>
+				</div>
+				<div class="flexContainer" style="background-color: rgba(0, 247, 255, 0.4); width: 33%; min-height: 400px;">
+					<div class="mltMinorTitle">Multiversal Compressors III: <span id="compressors3"></span></div>
+					<div>Makes Multiversal Quilt III is <span id="compressors3eff" class="mlttxt"></span>% stronger.</div><br><br>
+					<button id="compsGet3" class="btn locked" onclick="getCompressors(3)">Get Multiversal Compressors III</button><br><br>
+					<div id="comps3MilestoneTable"></div>
 				</div>
 			</div>
 		</div>
@@ -2425,6 +2455,7 @@
 	<script type="text/javascript" src="js/game.js"></script>
 
 	<!-- File Data -->
+	<script type="text/javascript" src="js/main/multiverse/compressors.js"></script>
 	<script type="text/javascript" src="js/main/multiverse/quilts.js"></script>
 	<script type="text/javascript" src="js/main/multiverse/mlt.js"></script>
 	<script type="text/javascript" src="js/main/elementary/bosons.js"></script>

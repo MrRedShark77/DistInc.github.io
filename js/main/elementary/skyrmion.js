@@ -64,6 +64,7 @@ function getSkyGain() {
 	if (player.elementary.entropy.upgrades.includes(30)) gain = gain.times(tmp.elm.entropy.upgEff[30])
 	if (mltRewardActive(1) && tmp.mlt) gain = gain.times(tmp.mlt.mlt1reward)
 	if (tmp.fn) if (tmp.fn.pl) if (tmp.fn.pl.unl) gain = gain.times(tmp.fn.pl.boosts[8])
+	if (hasCompsMilestone(2,1)) gain = gain.times(MLT_COMPS_MIL[2][0].effect())
 	return gain.floor();
 }
 

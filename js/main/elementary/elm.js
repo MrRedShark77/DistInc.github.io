@@ -85,6 +85,7 @@ function updateElementaryLayer() {
 		if (gain.gte(tmp.elm.softcap)) gain = gain.pow(exp).times(ExpantaNum.pow(tmp.elm.softcap, ExpantaNum.sub(1, exp)))
 		if (player.elementary.foam.unl && tmp.elm.qf) gain = gain.times(tmp.elm.qf.boost12) // not affected by softcap hehe
 		if (tmp.inf) if (tmp.inf.upgs.has("4;11")) gain = gain.times(INF_UPGS.effects['4;11']())
+		if (hasCompsMilestone(1,1)) gain = gain.times(MLT_COMPS_MIL[1][0].effect())
 	
 		if (modeActive("extreme")) gain = gain.div(3).plus(gain.gte(1)?1:0)
 		return gain.floor();

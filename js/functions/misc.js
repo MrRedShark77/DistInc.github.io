@@ -181,6 +181,7 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	if (ret.version < 1.9 || !ret.elementary.sky) ret.elementary.sky = deepCopy(sc.elementary.sky);
 	if (ret.version < 2.0 || !ret.mlt) ret.mlt = deepCopy(sc.mlt);
 	if (ret.version < sc.version) onVersionChange();
+	if (ret.mlt.compressors === undefined) ret.mlt.compressors = deepCopy(sc.mlt.compressors)
 	if (ret.elementary.fermions.hadrons === undefined) ret.elementary.fermions.hadrons = deepCopy(sc.elementary.fermions.hadrons)
 	if (ret.elementary.theory.tree.spent === undefined) ret.elementary.theory.tree.spent = deepCopy(sc.elementary.theory.tree.spent)
 	if (ret.elementary.theory.inflatons === undefined) ret.elementary.theory.inflatons = deepCopy(sc.elementary.theory.inflatons)
@@ -344,6 +345,7 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	ret.mlt.bestEnergy = new ExpantaNum(ret.mlt.bestEnergy);
 	ret.mlt.totalEnergy = new ExpantaNum(ret.mlt.totalEnergy);
 	for (let i=0;i<Object.keys(ret.mlt.quiltUpgs).length;i++) ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]] = new ExpantaNum(ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]]);
+	for (let i=0;i<Object.keys(ret.mlt.compressors).length;i++) ret.mlt.compressors[Object.keys(ret.mlt.compressors)[i]] = new ExpantaNum(ret.mlt.compressors[Object.keys(ret.mlt.compressors)[i]]);
 	ret.version = Math.max(ret.version, sc.version);
 	return ret;
 }

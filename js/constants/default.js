@@ -254,6 +254,7 @@ const DEFAULT_START = {
 		highestUnlocked: 0,
 		active: 0,
 		quiltUpgs: [new ExpantaNum(0), new ExpantaNum(0), new ExpantaNum(0)],
+		compressors: [new ExpantaNum(0), new ExpantaNum(0), new ExpantaNum(0)],
 		mlt1selected: [],
 		mlt3selected: [],
 	},

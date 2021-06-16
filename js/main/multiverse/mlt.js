@@ -5,6 +5,7 @@ function updateTempMultiverse() {
 	updateMultiverseLayer();
 	updateMultiverseTabs();
 	updateQuilts();
+	updateCompressors();
 }
 
 function updateMiscMltStuff() {
@@ -80,6 +81,7 @@ function setMultiverseResetFunction() {
 function updateMultiverseLayer() {
 	tmp.mlt.can = player.distance.gte(DISTANCES.mlt)
 	tmp.mlt.softcap = MLT_ENERGY_SS
+	if (tmp.inf) if (tmp.inf.upgs.has("6;11")) tmp.mlt.softcap = tmp.mlt.softcap.times(10)
 	if (!tmp.mlt.gain) tmp.mlt.gain = function() { 
 		if (player.distance.lt(DISTANCES.mlt)) return new ExpantaNum(0);
 		let exp = player.distance.logBase(DISTANCES.mlt).sub(1);

@@ -213,6 +213,7 @@ function checkR20Ach() {
 	if (player.tier.gte(166)) tmp.ach[201].grant();
 	if (player.distance.gte("2.8e420000026643") && player.inf.derivatives.unlocks.lte(0)) tmp.ach[202].grant();
 	if (player.distance.gte("4.4e4500000026") && player.inf.stadium.current == 'reality') tmp.ach[203].grant();
+	if (player.inf.endorsements.gte(200)) tmp.ach[205].grant();
 }
 
 function updateAchievements() {
