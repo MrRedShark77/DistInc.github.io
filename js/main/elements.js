@@ -977,12 +977,12 @@ function updateLeptonsHTML(){
 }
 
 function updateHadronsHTML(){
-	tmp.el.hadronUnl.changeStyle("visibility", (hasMltMilestone(27)?"visible":"hidden"))
-	tmp.el.hadrons.setHTML(
+	tmp.el.hadronFUnl.changeStyle("visibility", (hasMltMilestone(27)?"visible":"hidden"))
+	tmp.el.hadronsF.setHTML(
 		showNum(player.elementary.fermions.hadrons.amount) + " " + tmp.elm.ferm.hadronName() + " Hadrons"
 	);
-	tmp.el.hadronGain.setTxt(showNum(adjustGen(tmp.elm.ferm.hadronGain, "heptons")));
-	tmp.el.hadronRewards.setTooltip(
+	tmp.el.hadronFGain.setTxt(showNum(adjustGen(tmp.elm.ferm.hadronGain, "heptons")));
+	tmp.el.hadronFRewards.setTooltip(
 		tmp.elm.ferm.hadronName(true) +
 			" Hadrons: " +
 			tmp.elm.ferm.hadronDesc(HADRON_NAMES[player.elementary.fermions.hadrons.type - 1])

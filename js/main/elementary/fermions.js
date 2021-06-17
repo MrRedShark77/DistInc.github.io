@@ -121,6 +121,7 @@ function updateTempHadrons() {
 		.max(0);
 	if (tmp.inf) if (tmp.inf.upgs.has("11;3")) tmp.elm.ferm.hadronGain = tmp.elm.ferm.hadronGain.times(INF_UPGS.effects["11;3"]())
 	if (hasCompsMilestone(3,2)) tmp.elm.ferm.hadronGain = tmp.elm.ferm.hadronGain.times(MLT_COMPS_MIL[3][1].effect())
+	if (tmp.inf) if (tmp.inf.upgs.has("11;6") && player.elementary.fermions.hadrons.type == 1) tmp.elm.ferm.hadronGain = tmp.elm.ferm.hadronGain.pow(1.75)
 	if (!hasMltMilestone(27)) tmp.elm.ferm.hadronGain = new ExpantaNum(0)
 	tmp.elm.ferm.hadronRewards = new ExpantaNum(player.elementary.fermions.hadrons.amount).max(1).logBase(10000)
 	if (hasCompsMilestone(2,2)) tmp.elm.ferm.hadronRewards = tmp.elm.ferm.hadronRewards.times(MLT_COMPS_MIL[2][1].effect())

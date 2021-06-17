@@ -261,6 +261,21 @@ function loadTempFeatures() {
 				}
 			},
 		}),
+		'multiversal compressors': new Feature({
+			name: "multiversal compressors",
+			req: function() { return new ExpantaNum(1e17) },
+			res: ['mlt', 'totalEnergy'],
+			resName: "Total Multiversal Energy",
+			display: showNum,
+			reached: function() { return false },
+			progress: function() {
+				if (player.options.featPerc=="logarithm") {
+					return player.mlt.totalEnergy.max(1).log10().div(ExpantaNum.log10(1e17)).min(1);
+				} else {
+					return player.mlt.totalEnergy.div(1e17).min(1);
+				}
+			},
+		}),
 	};
 }
 
