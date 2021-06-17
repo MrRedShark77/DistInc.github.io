@@ -1625,10 +1625,12 @@ function updateOverallMultiverseHTML() {
 			}
 			tmp.el.quilt2Eff2Desc.setTxt(hasMltMilestone(6)?", Pion gain, & Spinor gain":"")
 			tmp.el.quilt3sc.setTxt(tmp.mlt.quilts[3].eff.gte(tmp.mlt.quilts[3].scStart)?" (softcapped)":"")
+			tmp.el.quilt2sc.setTxt(tmp.mlt.quilts[2].eff.gte(tmp.mlt.quilts[2].scStart)?" (softcapped)":"")
 		} else if (mltTab == "compressors") {
 			tmp.el["compressorsValue"].setTxt(showNum(tmp.mlt.compressors))
 			tmp.el["compressorsNext"].setTxt(showNum(tmp.mlt.compressorsNext))
 			tmp.el["unspentComps"].setTxt(showNum(tmp.mlt.haveComps))
+			tmp.el.compsName.setTxt(getScalingName("compressors") + " ");
 			for (let i=1;i<=3;i++) {
 				tmp.el["compsGet"+i].setClasses({btn: true, locked: !canGetCompressors(), mlt: canGetCompressors()})
 				tmp.el["compressors"+i].setTxt(showNum(player.mlt.compressors[i-1]))
@@ -1639,6 +1641,7 @@ function updateOverallMultiverseHTML() {
 					if (tmp.el["comps"+i+"Mil"+r+"effDesc"]) tmp.el["comps"+i+"Mil"+r+"effDesc"].setHTML(MLT_COMPS_MIL[i][r-1].effectDesc())
 				}
 			}
+			tmp.el.comps3sc.setTxt(getCompEffect(3).gte(tmp.mlt.comps3soft)?" (softcapped)":"")
 		}
 	}
 }

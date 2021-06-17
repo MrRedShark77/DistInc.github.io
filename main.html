@@ -76,7 +76,7 @@
 				<div class="flexContainer" style="background-color: rgba(255, 183, 0, 0.4); width: 33%; min-height: 400px;">
 					<div class="mltMinorTitle">Multiversal Quilt II</div>
 					<div>Quilt Strength: <span id="quilt2Strength" class="mlttxt"></span>% (based on Knowledge)</div><br>
-					<div>Makes Endorsements <span id="quilt2Eff" class="mlttxt"></span>% more efficient</div><br>
+					<div>Makes Endorsements <span id="quilt2Eff" class="mlttxt"></span>%<span id="quilt2sc" class="sc dark"></span> more efficient</div><br>
 					<div>Also multiplies Theory Point gain from Theoriverse completions<span id="quilt2Eff2Desc"></span> by <span id="quilt2Eff2" class="mlttxt"></span></div><br><br>
 					<button id="quiltUpg2" class="btn locked" onclick="buyQuiltUpg(2)"></button>
 				</div>
@@ -90,8 +90,10 @@
 			</div>
 		</div>
 		<div id="compressors" class="mlttab">
-			<div>Multiversal Compressors: <span id='compressorsValue' style="font-size: 25px;"></span> (+1 next at <span id='compressorsNext' style="font-size: 25px;"></span> Total Multiversal Energy)</div>
+			<div><span id="compsName"></span>Multiversal Compressors: <span id='compressorsValue' style="font-size: 25px;"></span> (+1 next at <span id='compressorsNext' style="font-size: 25px;"></span> Total Multiversal Energy)</div>
 			<div>Have <span id='unspentComps' style="font-size: 25px;"></span> unspent Multiversal Compressors.</div>
+			<br>
+			<button class="btn mlt" onclick='respecCompressors()'>Respec Multiversal Compressors</button>
 			<br><br>
 			<div class="flexRow">
 				<div class="flexContainer" style="background-color: rgba(183, 0, 255, 0.4); width: 33%; min-height: 400px;">
@@ -108,7 +110,7 @@
 				</div>
 				<div class="flexContainer" style="background-color: rgba(0, 247, 255, 0.4); width: 33%; min-height: 400px;">
 					<div class="mltMinorTitle">Multiversal Compressors III: <span id="compressors3"></span></div>
-					<div>Makes Multiversal Quilt III is <span id="compressors3eff" class="mlttxt"></span>% stronger.</div><br><br>
+					<div>Makes Multiversal Quilt III is <span id="compressors3eff" class="mlttxt"></span>%<span id="comps3sc" class="sc dark"></span> stronger.</div><br><br>
 					<button id="compsGet3" class="btn locked" onclick="getCompressors(3)">Get Multiversal Compressors III</button><br><br>
 					<div id="comps3MilestoneTable"></div>
 				</div>

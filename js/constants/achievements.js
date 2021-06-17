@@ -355,7 +355,7 @@ const ACH_DATA = {
 		198: "Reach formatDistance(2.8e1000000026643).",
 
 		201: "Reach Tier showNum(166).",
-		202: "Reach formatDistance(2.8e420000026643) without Derivatives unlocked.",
+		202: "Reach formatDistance(2.8e420000026643) without Derivatives shifts & boosts.",
 		203: "Reach formatDistance(4.4e4500000026) while in Reality.",
 		204: "Gain showNum(1e15) Multiversal Energy in one reset.",
 		205: "Reach 200 Endorsements.",

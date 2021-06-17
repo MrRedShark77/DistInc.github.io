@@ -1,14 +1,25 @@
 const MLT_COMPS_MIL = {
-    lengths: [1,1,2],
+    lengths: [2,2,2],
     1: [
         {
             req: new ExpantaNum(1),
             desc: "Time Speed can affect the speed of Elementary Particles at a reduced rate.",
             effect() {
-                let ret = tmp.timeSpeed ? tmp.timeSpeed.max(1).log10().add(1).pow(15) : new ExpantaNum(0)
+                let ret = tmp.timeSpeed ? tmp.timeSpeed.max(1).log10().add(1).pow(15) : new ExpantaNum(1)
                 return ret
             },
             effectDesc(eff=this.effect()) { return showNum(eff)+'x' },
+        }, {
+            req: new ExpantaNum(2),
+            desc: "Time Speed can affect the speed of Theory subfeatures at a reduced rate.",
+            effect() {
+                let ret = {}
+                let time = tmp.timeSpeed ? tmp.timeSpeed : new ExpantaNum(0)
+                ret.first = time.max(1).log10().add(1).pow(100)
+                ret.second = time.max(1).log10().add(1).pow(25)
+                return ret
+            },
+            effectDesc(eff=this.effect()) { return 'Supersymmetry Resources, Strings, Inflatons: '+showNum(eff.first)+'x; Preons: '+showNum(eff.second)+'x' },
         },
     ],
     2: [
@@ -18,6 +29,14 @@ const MLT_COMPS_MIL = {
             effect() {
                 let ret = player.elementary.sky.pions.amount.add(1).log10().add(1)
                 .times(player.elementary.sky.spinors.amount.add(1).log10().add(1))
+                return ret
+            },
+            effectDesc(eff=this.effect()) { return showNum(eff)+'x' },
+        }, {
+            req: new ExpantaNum(2),
+            desc: "Skyrmions boosts Hadron exponents at a reduced rate.",
+            effect() {
+                let ret = player.elementary.sky.amount.add(1).log10().add(1).pow(1/2)
                 return ret
             },
             effectDesc(eff=this.effect()) { return showNum(eff)+'x' },
@@ -41,6 +60,7 @@ const MLT_COMPS_MIL = {
 
 function getCompEffect(x) {
     let ret = player.mlt.compressors[x-1].add(1).pow(1/5)
+    if (x == 3 && (tmp.mlt ? ret.gte(tmp.mlt.comps3soft) : false)) ret = ret.times(tmp.mlt.comps3soft.pow(2)).cbrt();
     return ret
 }
 
@@ -55,17 +75,40 @@ function getCompressors(x) {
 function getCompressorsFromME() {
     if (player.mlt.totalEnergy.lt(1e17)) return new ExpantaNum(0)
     let gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).add(1).floor()
-    return gain
+    if (scalingActive("compressors", gain, "scaled")) {
+        let s = getScalingStart("scaled", "compressors").sub(2)
+        let pow = getScalingPower("scaled", "compressors")
+        let exp = ExpantaNum.pow(1.5, pow)
+        gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).add(1).floor()
+    }
+    return gain.floor()
 }
 
 function getCompressorsNext() {
-    return ExpantaNum.pow(5, getCompressorsFromME()).mul(1e17)
+    let comps = tmp.mlt ? tmp.mlt.compressors : new ExpantaNum(1/0)
+    let get = comps
+    if (scalingActive("compressors", get, "scaled")) {
+        let s = getScalingStart("scaled", "compressors").sub(2)
+        let pow = getScalingPower("scaled", "compressors")
+        let exp = ExpantaNum.pow(1.5, pow)
+        get = comps.pow(exp).div(s.pow(exp.sub(1)))
+    }
+    return ExpantaNum.pow(5, get).mul(1e17)
 }
 
 function updateCompressors() {
     tmp.mlt.compressors = getCompressorsFromME()
     tmp.mlt.compressorsNext = getCompressorsNext()
     tmp.mlt.haveComps = tmp.mlt.compressors.sub(player.mlt.compressors[0]).sub(player.mlt.compressors[1]).sub(player.mlt.compressors[2])
+
+    tmp.mlt.comps3soft = new ExpantaNum(1.25)
+}
+
+function respecCompressors() {
+    if (confirm("You really respec Multiversal Compressors? Then reset Multiversal Compressors, but make Multiverse reset.")) {
+        player.mlt.compressors = [new ExpantaNum(0), new ExpantaNum(0), new ExpantaNum(0)]
+        mltReset(false, true)
+    }
 }
 
 function hasCompsMilestone(x, y) { return player.mlt.compressors[x-1].gte(MLT_COMPS_MIL[x][y-1].req) }

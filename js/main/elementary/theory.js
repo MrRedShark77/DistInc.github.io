@@ -64,6 +64,7 @@ function updateTempSupersymmetry() {
 			tmp.elm.theory.ss[type+"Gain"] = tmp.elm.theory.ss[type+"Gain"].times(getStringEff(1))
 			if (player.elementary.foam.unl && tmp.elm.qf) tmp.elm.theory.ss[type+"Gain"] = tmp.elm.theory.ss[type+"Gain"].times(tmp.elm.qf.boost9)
 			if (player.elementary.sky.unl && tmp.elm.sky) tmp.elm.theory.ss[type+"Gain"] = tmp.elm.theory.ss[type+"Gain"].times(tmp.elm.sky.spinorEff[5])
+			if (hasCompsMilestone(1,2)) tmp.elm.theory.ss[type+"Gain"] = tmp.elm.theory.ss[type+"Gain"].times(MLT_COMPS_MIL[1][1].effect().first)
 		}
 		tmp.elm.theory.ss[type+"Eff"] = player.elementary.theory.supersymmetry[type+"s"].plus(1)
 		if (tmp.elm.theory.ss[type+"Eff"].gte(1e9)) tmp.elm.theory.ss[type+"Eff"] = tmp.elm.theory.ss[type+"Eff"].cbrt().times(1e6)
@@ -193,6 +194,7 @@ function getStringGain(n) {
 	if (tmp.ach[157].has) gain = gain.times(2)
 	if (player.elementary.foam.unl && tmp.elm.qf) gain = gain.times(tmp.elm.qf.boost15)
 	if (tmp.elm) gain = gain.times(tmp.elm.theory.speed)
+	if (hasCompsMilestone(1,2)) gain = gain.times(MLT_COMPS_MIL[1][1].effect().first)
 	return gain
 }
 
@@ -209,6 +211,7 @@ function getEntangleGain() {
 	gain = gain.times(TREE_UPGS[6].effect(player.elementary.theory.tree.upgrades[6]||0))
 	gain = gain.times(TREE_UPGS[30].effect(player.elementary.theory.tree.upgrades[30]||0))
 	if (player.elementary.foam.unl && tmp.elm.qf) gain = gain.times(tmp.elm.qf.boost3)
+	if (hasCompsMilestone(1,2)) gain = gain.times(MLT_COMPS_MIL[1][1].effect().first)
 	return gain
 }
 
@@ -241,6 +244,7 @@ function getPreonGain() {
 	let gain = player.elementary.theory.strings.amounts[0].plus(1).log10().div(10)
 	gain = gain.times(TREE_UPGS[9].effect(player.elementary.theory.tree.upgrades[9]||0))
 	if (tmp.elm) gain = gain.times(tmp.elm.theory.speed)
+	if (hasCompsMilestone(1,2)) gain = gain.times(MLT_COMPS_MIL[1][1].effect().second)
 	return gain
 }
 
@@ -440,6 +444,7 @@ function getInflatonGain() {
 	gain = gain.times(player.elementary.theory.inflatons.amount.plus(1).pow((tmp.elm.hc.infState+1)/6))
 	if (gain.gte(5e4)) gain = gain.times(5e4).sqrt()
 	if (player.elementary.foam.unl && tmp.elm.qf) gain = gain.times(tmp.elm.qf.boost4)
+	if (hasCompsMilestone(1,2)) gain = gain.times(MLT_COMPS_MIL[1][1].effect().first)
 	return gain
 }
 
