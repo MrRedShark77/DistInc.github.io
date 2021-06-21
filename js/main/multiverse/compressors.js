@@ -99,7 +99,7 @@ function getCompressorsFromME() {
         let s = getScalingStart("scaled", "compressors").sub(2)
         let pow = getScalingPower("scaled", "compressors")
         let exp = ExpantaNum.pow(1.5, pow)
-        gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).add(1).floor()
+        gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).root(exp).add(1).floor()
     }
     if (scalingActive("compressors", gain, "superscaled")) {
         let s = getScalingStart("scaled", "compressors").sub(2)
@@ -108,7 +108,7 @@ function getCompressorsFromME() {
         let pow2 = getScalingPower("superscaled", "compressors")
         let exp = ExpantaNum.pow(1.5, pow)
         let exp2 = ExpantaNum.pow(1.5, pow2)
-        gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).mul(s2.pow(exp2.sub(1))).max(1).root(exp2).add(1).floor()
+        gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s2.pow(exp2.sub(1))).root(exp2).mul(s.pow(exp.sub(1))).root(exp).add(1).floor()
     }
     return gain.floor()
 }
