@@ -68,7 +68,12 @@ const MLT_COMPS_MIL = {
             effectDesc(eff=this.effect()) { return showNum(eff)+'x' },
         }, {
             req: new ExpantaNum(3),
-            desc: "Make Gauge Force is twice stronger.",
+            desc: "Make Gauge Force is stronger based on Bosons.",
+            effect() {
+                let ret = player.elementary.bosons.amount.max(1).log10().add(1).div(1000)
+                return ret
+            },
+            effectDesc(eff=this.effect()) { return "^"+showNum(eff) },
         },
     ],
 }
