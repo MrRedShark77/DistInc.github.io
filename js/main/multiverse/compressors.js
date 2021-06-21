@@ -1,5 +1,5 @@
 const MLT_COMPS_MIL = {
-    lengths: [2,2,2],
+    lengths: [3,3,2],
     1: [
         {
             req: new ExpantaNum(1),
@@ -20,6 +20,15 @@ const MLT_COMPS_MIL = {
                 return ret
             },
             effectDesc(eff=this.effect()) { return 'Supersymmetry Resources, Strings, Inflatons: '+showNum(eff.first)+'x; Preons: '+showNum(eff.second)+'x' },
+        }, {
+            req: new ExpantaNum(3),
+            desc: "Time Speed can affect the speed of all Foam types at a reduced rate.",
+            effect() {
+                let time = tmp.timeSpeed ? tmp.timeSpeed : new ExpantaNum(0)
+                let ret = time.max(1).log10().add(1).pow(150)
+                return ret
+            },
+            effectDesc(eff=this.effect()) { return showNum(eff)+'x' },
         },
     ],
     2: [
@@ -40,6 +49,9 @@ const MLT_COMPS_MIL = {
                 return ret
             },
             effectDesc(eff=this.effect()) { return showNum(eff)+'x' },
+        }, {
+            req: new ExpantaNum(3),
+            desc: "All Pion/Spinor Upgrades &theta; are thrice stronger.",
         },
     ],
     3: [
@@ -74,24 +86,43 @@ function getCompressors(x) {
 
 function getCompressorsFromME() {
     if (player.mlt.totalEnergy.lt(1e17)) return new ExpantaNum(0)
-    let gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).add(1).floor()
+    let gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).floor()
+    let get = gain
     if (scalingActive("compressors", gain, "scaled")) {
         let s = getScalingStart("scaled", "compressors").sub(2)
         let pow = getScalingPower("scaled", "compressors")
         let exp = ExpantaNum.pow(1.5, pow)
-        gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).add(1).floor()
+        get = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).floor()
     }
-    return gain.floor()
+    if (scalingActive("compressors", gain, "superscaled")) {
+        let s = getScalingStart("scaled", "compressors").sub(2)
+        let s2 = getScalingStart("superscaled", "compressors").sub(2)
+        let pow = getScalingPower("scaled", "compressors")
+        let pow2 = getScalingPower("superscaled", "compressors")
+        let exp = ExpantaNum.pow(1.5, pow)
+        let exp2 = ExpantaNum.pow(1.75, pow2)
+        get = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).mul(s2.pow(exp2.sub(1))).max(1).root(exp2).floor()
+    }
+    return get.add(1).floor()
 }
 
 function getCompressorsNext() {
     let comps = tmp.mlt ? tmp.mlt.compressors : new ExpantaNum(1/0)
     let get = comps
-    if (scalingActive("compressors", get, "scaled")) {
+    if (scalingActive("compressors", comps, "scaled")) {
         let s = getScalingStart("scaled", "compressors").sub(2)
         let pow = getScalingPower("scaled", "compressors")
         let exp = ExpantaNum.pow(1.5, pow)
         get = comps.pow(exp).div(s.pow(exp.sub(1)))
+    }
+    if (scalingActive("compressors", comps, "superscaled")) {
+        let s = getScalingStart("scaled", "compressors").sub(2)
+        let s2 = getScalingStart("superscaled", "compressors").sub(2)
+        let pow = getScalingPower("scaled", "compressors")
+        let pow2 = getScalingPower("superscaled", "compressors")
+        let exp = ExpantaNum.pow(1.5, pow)
+        let exp2 = ExpantaNum.pow(1.75, pow2)
+        get = comps.pow(exp).div(s.pow(exp.sub(1))).pow(exp2).div(s2.pow(exp2.sub(1)))
     }
     return ExpantaNum.pow(5, get).mul(1e17)
 }

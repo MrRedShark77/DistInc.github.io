@@ -77,6 +77,7 @@ function tickWithoutTS(diff) {
 		player.furnace.enhancedCoal = player.furnace.enhancedCoal.plus(adjustGen(tmp.fn.enh.gain, "fn").times(diff));
 	}
 	if (player.elementary.times.gt(0) || player.mlt.times.gt(0)) elTick(diff);
+	if (player.mlt.times.gt(0)) mltTick(diff)
 	if (modeActive("hikers_dream")) {
 		player.energy = player.energy.sub(tmp.hd.energyLoss.times(diff)).max(0);
 		if (player.inf.endorsements.gte(10)) player.energy = player.energy.plus(tmp.hd.energyGen.times(diff)).min(getEnergyLim())

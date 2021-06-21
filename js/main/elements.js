@@ -1589,7 +1589,7 @@ function updateOverallMultiverseHTML() {
 			tmp.el.mltReset2.setHTML(
 				(player.mlt.times.eq(0)?("You have travelled across the entire multiverse, you must move on."):("Obliterate the multiverse to create <span class='mlttxt'>" +
 				showNum(tmp.mlt.layer.gain) +
-				"</span> Multiversal Energy."))
+				"</span> Multiversal Energy." + (tmp.mlt.layer.gain.gte(tmp.mlt.softcap)?" <span class='sc'>(softcapped)</span>":"")))
 			);
 		}
 		

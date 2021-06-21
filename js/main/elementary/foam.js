@@ -118,6 +118,7 @@ function getQuantumFoamGain(x) {
 	if (ExpantaNum.gte(player.elementary.theory.tree.upgrades[42]||0, 1) && hasDE(6)) gain = gain.times(TREE_UPGS[42].effect(player.elementary.theory.tree.upgrades[42]||0))
 	if (modeActive("easy")) gain = gain.times(Math.pow(5/x, 2)*2.5)
 	if (tmp.inf) if (tmp.inf.upgs.has("3;11")) gain = gain.pow(INF_UPGS.effects["3;11"]())
+	if (hasCompsMilestone(1,3)) gain = gain.times(MLT_COMPS_MIL[1][2].effect())
 	return gain
 }
 

@@ -230,3 +230,12 @@ function setupMltMilestoneTable() {
 	data += "</table>"
 	milestones.setHTML(data);
 }
+
+function mltTick(diff) {
+	if (hasMltMilestone(31)) {
+		let gain = tmp.mlt.gain().mul(diff/10)
+		player.mlt.energy = player.mlt.energy.add(gain)
+		player.mlt.totalEnergy = player.mlt.totalEnergy.add(gain)
+		if (player.mlt.energy.gt(player.mlt.bestEnergy)) player.mlt.bestEnergy = player.mlt.energy
+	}
+}

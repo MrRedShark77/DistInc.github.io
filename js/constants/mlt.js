@@ -55,7 +55,7 @@ const MLT_DATA = {
 	},
 }
 
-const MLT_MILESTONE_NUM = 30;
+const MLT_MILESTONE_NUM = 31;
 
 const MLT_MILESTONES = [
 	{
@@ -187,6 +187,9 @@ const MLT_MILESTONES = [
 	}, {
 		req: new ExpantaNum(1e17),
 		desc: "Unlock Multiversal Compressors.",
+	}, {
+		req: new ExpantaNum(1e23),
+		desc: "Gain 10% of Multiversal Energies gained on reset per second.",
 	},
 ]
 

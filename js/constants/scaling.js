@@ -28,7 +28,8 @@ const SCALING_STARTS = {
 		endorsements: new ExpantaNum(50),
 		enlightenments: new ExpantaNum(20),
 		spectralGems: new ExpantaNum(16),
-		dervBoost: new ExpantaNum(14)
+		dervBoost: new ExpantaNum(14),
+		compressors: new ExpantaNum(10),
 	},
 	hyper: {
 		rank: new ExpantaNum(160),
@@ -116,5 +117,5 @@ const REAL_SCALING_NAMES = {
 	spectralGems: "spectral gems",
 	dervBoost: "derivative boosts",
 	photons: "photon upgrades",
-	compressors: "multiversal compressons",
+	compressors: "multiversal compressors",
 }
