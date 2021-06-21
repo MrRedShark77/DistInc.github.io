@@ -180,6 +180,10 @@ function getScalingPower(type, name) {
 		if (type == 'scaled') {
 			if (hasCompsMilestone(3,1)) power = power.times(0.1)
 		}
+	} else if (name=="compressors") {
+		if (type == 'scaled') {
+			if (tmp.ach[207].has) power = power.times(0.95)
+		}
 	}
 	if (type=="hyper"&&name!="darkCore") power = power.max(0.5)
 	return power

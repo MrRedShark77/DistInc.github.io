@@ -1,5 +1,5 @@
 const MLT_COMPS_MIL = {
-    lengths: [3,3,2],
+    lengths: [3,3,3],
     1: [
         {
             req: new ExpantaNum(1),
@@ -66,6 +66,9 @@ const MLT_COMPS_MIL = {
                 return ret
             },
             effectDesc(eff=this.effect()) { return showNum(eff)+'x' },
+        }, {
+            req: new ExpantaNum(3),
+            desc: "Make Gauge Force is twice stronger.",
         },
     ],
 }
@@ -86,24 +89,23 @@ function getCompressors(x) {
 
 function getCompressorsFromME() {
     if (player.mlt.totalEnergy.lt(1e17)) return new ExpantaNum(0)
-    let gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).floor()
-    let get = gain
+    let gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).add(1).floor()
     if (scalingActive("compressors", gain, "scaled")) {
         let s = getScalingStart("scaled", "compressors").sub(2)
         let pow = getScalingPower("scaled", "compressors")
         let exp = ExpantaNum.pow(1.5, pow)
-        get = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).floor()
+        gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).add(1).floor()
     }
     if (scalingActive("compressors", gain, "superscaled")) {
         let s = getScalingStart("scaled", "compressors").sub(2)
-        let s2 = getScalingStart("superscaled", "compressors").sub(2)
+        let s2 = getScalingStart("superscaled", "compressors")
         let pow = getScalingPower("scaled", "compressors")
         let pow2 = getScalingPower("superscaled", "compressors")
         let exp = ExpantaNum.pow(1.5, pow)
-        let exp2 = ExpantaNum.pow(1.75, pow2)
-        get = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).mul(s2.pow(exp2.sub(1))).max(1).root(exp2).floor()
+        let exp2 = ExpantaNum.pow(1.5, pow2)
+        gain = player.mlt.totalEnergy.div(1e17).max(1).logBase(5).mul(s.pow(exp.sub(1))).max(1).root(exp).mul(s2.pow(exp2.sub(1))).max(1).root(exp2).add(1).floor()
     }
-    return get.add(1).floor()
+    return gain.floor()
 }
 
 function getCompressorsNext() {
@@ -117,11 +119,11 @@ function getCompressorsNext() {
     }
     if (scalingActive("compressors", comps, "superscaled")) {
         let s = getScalingStart("scaled", "compressors").sub(2)
-        let s2 = getScalingStart("superscaled", "compressors").sub(2)
+        let s2 = getScalingStart("superscaled", "compressors")
         let pow = getScalingPower("scaled", "compressors")
         let pow2 = getScalingPower("superscaled", "compressors")
         let exp = ExpantaNum.pow(1.5, pow)
-        let exp2 = ExpantaNum.pow(1.75, pow2)
+        let exp2 = ExpantaNum.pow(1.5, pow2)
         get = comps.pow(exp).div(s.pow(exp.sub(1))).pow(exp2).div(s2.pow(exp2.sub(1)))
     }
     return ExpantaNum.pow(5, get).mul(1e17)

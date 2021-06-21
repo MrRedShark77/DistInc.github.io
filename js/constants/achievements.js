@@ -178,8 +178,8 @@ const ACH_DATA = {
 		203: "Ow, Infinity!",
 		204: "Go to Megaverse?",
 		205: "The Meta-Infinity",
-		206: "Placeholder",
-		207: "Placeholder",
+		206: "Upgrade Quilts",
+		207: "The Impossible Task",
 		208: "Placeholder",
 	},
 	descs: {
@@ -359,8 +359,8 @@ const ACH_DATA = {
 		203: "Reach formatDistance(4.4e4500000026) while in Reality.",
 		204: "Gain showNum(1e15) Multiversal Energy in one reset.",
 		205: "Reach 200 Endorsements.",
-		206: "Placeholder",
-		207: "Placeholder",
+		206: "Get 3 multiversal compressors.",
+		207: "Get Best Hadronic Score of at least 50.",
 		208: "Placeholder",
 	},
 	rewards: {
@@ -482,5 +482,6 @@ const ACH_DATA = {
 		201: "Pathogen Upgrades are x1.25 stronger.",
 		202: "Gain showNum(42)x more Multiversal Energy.",
 		203: "Knowledge gain are raised by 1.5.",
+		207: "Scaled Multiversal Compressors scaling is 5% weaker.",
 	}
 };

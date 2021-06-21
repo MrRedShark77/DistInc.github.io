@@ -214,6 +214,8 @@ function checkR20Ach() {
 	if (player.distance.gte("2.8e420000026643") && player.inf.derivatives.unlocks.lte(0)) tmp.ach[202].grant();
 	if (player.distance.gte("4.4e4500000026") && player.inf.stadium.current == 'reality') tmp.ach[203].grant();
 	if (player.inf.endorsements.gte(200)) tmp.ach[205].grant();
+	if (tmp.mlt.compressors.gte(3)) tmp.ach[206].grant();
+	if (player.elementary.hc.best.gte(50)) tmp.ach[207].grant();
 }
 
 function updateAchievements() {
