@@ -36,6 +36,7 @@ function updatePathogensGain(){
 	if (tmp.fn && modeActive("extreme")) tmp.pathogens.gain = tmp.pathogens.gain.times(tmp.fn.enh.moltBrEff||1)
 	if (player.elementary.foam.unl && tmp.elm) tmp.pathogens.gain = tmp.pathogens.gain.times(tmp.elm.qf.boost24)
 	if (tmp.inf) if (tmp.inf.upgs.has("1;11")) tmp.pathogens.gain = tmp.pathogens.gain.pow(1.5)
+	if (havePlanckLUpgarde(3).gte(1)) tmp.pathogens.gain = tmp.pathogens.gain.pow(PLANCK_UPGS.lengths[3].effect())
 }
 
 function updateTempPathogens() {

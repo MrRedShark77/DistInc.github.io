@@ -40,6 +40,11 @@
 							Compressors
 						</button>
 					</td>
+					<td>
+						<button id="plancktabbtn" class="btn tb mlt planck main" onclick="tmp.mlt.showTab('planck')">
+							Planck
+						</button>
+					</td>
 				</tr>
 			</table><br>
 		</div>
@@ -115,6 +120,13 @@
 					<div id="comps3MilestoneTable"></div>
 				</div>
 			</div>
+		</div>
+		<div id="planck" class="mlttab">
+			<div class="band black">
+				You reduced multiverse in <span id="planckValue" style="font-size: 25px;"></span> <span id="planckGain"></span> planck lengths (based on total multiversal energy)<br>
+				You gain <span id="planckGainBase" style="font-size: 25px;"></span> planck lengths each second.
+			</div><br>
+			<table id="planckTable"></table>
 		</div>
 	</div>
 	<div id="mainContainer" style="display: none">
@@ -2457,6 +2469,7 @@
 	<script type="text/javascript" src="js/game.js"></script>
 
 	<!-- File Data -->
+	<script type="text/javascript" src="js/main/multiverse/planck.js"></script>
 	<script type="text/javascript" src="js/main/multiverse/compressors.js"></script>
 	<script type="text/javascript" src="js/main/multiverse/quilts.js"></script>
 	<script type="text/javascript" src="js/main/multiverse/mlt.js"></script>

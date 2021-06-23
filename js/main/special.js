@@ -265,7 +265,7 @@ function loadTempFeatures() {
 			name: "multiversal compressors",
 			req: function() { return new ExpantaNum(1e17) },
 			res: ['mlt', 'totalEnergy'],
-			resName: "Total Multiversal Energy",
+			resName: "Total Multiversal Energites",
 			display: showNum,
 			reached: function() { return false },
 			progress: function() {
@@ -275,6 +275,35 @@ function loadTempFeatures() {
 					return player.mlt.totalEnergy.div(1e17).min(1);
 				}
 			},
+		}),
+		planck: new Feature({
+			name: "planck",
+			res_amt: 2,
+			req: [
+				new ExpantaNum("4.4e37000000000026"),
+				new ExpantaNum("1e29"),
+			],
+			res: ["distance", function() { return player.mlt.totalEnergy }],
+			resName: ["distance", "total multiversal energies"],
+			display: [formatDistance, showNum],
+			reached: function() { return player.mlt.planck.unl },
+			progress: function () {
+				if (player.options.featPerc=="logarithm") {
+					return player.distance
+						.max(1)
+						.log10()
+						.div(new ExpantaNum("4.4e37000000000026").log10())
+						.min(1)
+						.times(player.elementary.fermions.leptons.amount.max(1).log10().div(new ExpantaNum("1e29").log10()).min(1));
+				} else {
+					return player.distance
+						.div("4.4e37000000000026")
+						.min(1)
+						.times(player.elementary.fermions.quarks.amount.div("1e29").min(1))
+				}
+			},
+			spec: [false, true],
+			superSpec: [false, true],
 		}),
 	};
 }

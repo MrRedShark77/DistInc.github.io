@@ -1646,6 +1646,19 @@ function updateOverallMultiverseHTML() {
 	}
 }
 
+function updatePlanckHTML() {
+	if (player.tab == "mlt" && mltTab == "planck") {
+		tmp.el.planckValue.setTxt(showNum(player.mlt.planck.lengths));
+		tmp.el.planckGainBase.setTxt(showNum(tmp.mlt.planck.gainBase));
+		tmp.el.planckGain.setTxt(formatGain(player.mlt.planck.lengths, tmp.mlt.planck.gain, "planck"))
+
+		for (let x = 1; x <= Object.keys(PLANCK_UPGS.lengths).length; x++) if (PLANCK_UPGS.lengths[x] !== undefined) {
+			tmp.el["planckL"+x].setHTML(PLANCK_UPGS.lengths[x].desc + "<br>Level: " + havePlanckLUpgarde(x) + "<br>Currently: " + PLANCK_UPGS.lengths[x].effDesc() + "<br>Cost: " + showNum(PLANCK_UPGS.lengths[x].cost()) + " Planck lengths")
+			tmp.el["planckL"+x].setClasses({btn: true, locked: player.mlt.planck.lengths.lt(PLANCK_UPGS.lengths[x].cost()), planck: player.mlt.planck.lengths.gte(PLANCK_UPGS.lengths[x].cost())})
+		}
+	}
+}
+
 function updateHTML() {
 	updateOptionsHTML()
 	updateMainHTML()
@@ -1663,6 +1676,7 @@ function updateHTML() {
 	updateOverallElementaryHTML()
 	updateOverallEnergyHTML()
 	updateOverallMultiverseHTML()
+	updatePlanckHTML()
 	updateMiscHTML()
 	
 	// Features

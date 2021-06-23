@@ -171,7 +171,7 @@ const INF_UPGS = {
 		"4;11": new ExpantaNum('e1.35e8'),
 		"5;11": new ExpantaNum('e2e8'),
 		"6;11": new ExpantaNum('e2.18e8'),
-		"7;11": new ExpantaNum(1/0),
+		"7;11": new ExpantaNum('e1e9'),
 		"8;11": new ExpantaNum(1/0),
 		"9;11": new ExpantaNum(1/0),
 		"10;11": new ExpantaNum(1/0),
@@ -295,7 +295,7 @@ const INF_UPGS = {
 		"4;11": "Total Multiversal Energy boosts Elementary Particles gain.",
 		"5;11": "Hadrons from the Fermions gain formula are better.",
 		"6;11": "Multiversal Energy gain softcap starts 10x later.",
-		"7;11": "Placeholder.",
+		"7;11": "Gain more Multiversal Energies based on your Multiversal Compressors.",
 		"8;11": "Placeholder.",
 		"9;11": "Placeholder.",
 		"10;11": "Placeholder.",
@@ -806,6 +806,11 @@ const INF_UPGS = {
 		"11;3": function() {
 			if (!tmp.timeSpeed) return new ExpantaNum(1)
 			let ret = tmp.timeSpeed.add(1).log10().add(1).log10().add(1).pow(2)
+			return ret
+		},
+		"7;11": function() {
+			if (!tmp.mlt) return new ExpantaNum(1)
+			let ret = ExpantaNum.pow(3,tmp.mlt.compressors)
 			return ret
 		},
 	}

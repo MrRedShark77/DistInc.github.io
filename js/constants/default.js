@@ -1,6 +1,6 @@
 const DEFAULT_START = {
 	tab: "main",
-	version: 2.0,
+	version: 2.1,
 	optionsTab: "saving",
 	achievements: [],
 	savePos: 1,
@@ -257,5 +257,11 @@ const DEFAULT_START = {
 		compressors: [new ExpantaNum(0), new ExpantaNum(0), new ExpantaNum(0)],
 		mlt1selected: [],
 		mlt3selected: [],
+		planck: {
+			unl: false,
+			lengths: new ExpantaNum(0),
+			maxLengths: new ExpantaNum(0),
+			upgrades: {},
+		},
 	},
 };

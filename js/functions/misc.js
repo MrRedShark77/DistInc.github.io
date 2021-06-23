@@ -158,6 +158,8 @@ function ENString(obj) {
 	ret.mlt.bestEnergy = new ExpantaNum(ret.mlt.bestEnergy).toString();
 	ret.mlt.totalEnergy = new ExpantaNum(ret.mlt.totalEnergy).toString();
 	for (let i=0;i<Object.keys(ret.mlt.quiltUpgs).length;i++) ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]] = new ExpantaNum(ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]]).toString();
+	ret.mlt.planck.lengths = new ExpantaNum(ret.mlt.planck.lengths).toString()
+	ret.mlt.planck.maxLengths = new ExpantaNum(ret.mlt.planck.maxLengths).toString()
 	return ret;
 }
 
@@ -180,6 +182,7 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	if (ret.version < 1.8 || !ret.elementary.entropy) ret.elementary.entropy = deepCopy(sc.elementary.entropy);
 	if (ret.version < 1.9 || !ret.elementary.sky) ret.elementary.sky = deepCopy(sc.elementary.sky);
 	if (ret.version < 2.0 || !ret.mlt) ret.mlt = deepCopy(sc.mlt);
+	if (ret.version < 2.1 || !ret.mlt.planck) ret.mlt.planck = deepCopy(sc.mlt.planck);
 	if (ret.version < sc.version) onVersionChange();
 	if (ret.mlt.compressors === undefined) ret.mlt.compressors = deepCopy(sc.mlt.compressors)
 	if (ret.elementary.fermions.hadrons === undefined) ret.elementary.fermions.hadrons = deepCopy(sc.elementary.fermions.hadrons)
@@ -346,6 +349,11 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	ret.mlt.totalEnergy = new ExpantaNum(ret.mlt.totalEnergy);
 	for (let i=0;i<Object.keys(ret.mlt.quiltUpgs).length;i++) ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]] = new ExpantaNum(ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]]);
 	for (let i=0;i<Object.keys(ret.mlt.compressors).length;i++) ret.mlt.compressors[Object.keys(ret.mlt.compressors)[i]] = new ExpantaNum(ret.mlt.compressors[Object.keys(ret.mlt.compressors)[i]]);
+	ret.mlt.planck.lengths = new ExpantaNum(ret.mlt.planck.lengths)
+	ret.mlt.planck.maxLengths = new ExpantaNum(ret.mlt.planck.maxLengths)
+	for (let i=0;i<Object.keys(ret.mlt.planck.upgrades).length;i++){
+		ret.mlt.planck.upgrades[Object.keys(ret.mlt.planck.upgrades)[i]] = new ExpantaNum(ret.mlt.planck.upgrades[Object.keys(ret.mlt.planck.upgrades)[i]])
+	}
 	ret.version = Math.max(ret.version, sc.version);
 	return ret;
 }

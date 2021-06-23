@@ -179,8 +179,8 @@ const ACH_DATA = {
 		204: "Go to Megaverse?",
 		205: "The Meta-Infinity",
 		206: "Upgrade Quilts",
-		207: "The Impossible Task",
-		208: "Placeholder",
+		207: "The Final Challenge",
+		208: "Beyond Multiverse",
 	},
 	descs: {
 		11: "Go at least formatDistance(100).",
@@ -361,7 +361,7 @@ const ACH_DATA = {
 		205: "Reach 200 Endorsements.",
 		206: "Get 3 multiversal compressors.",
 		207: "Get Best Hadronic Score of at least 50.",
-		208: "Placeholder",
+		208: "Reach formatDistance(2.8e40000000026643).",
 	},
 	rewards: {
 		12: "Acceleration is showNum(10)% higherboolean(extreme, and Rank Cheapeners are +0.5x stronger for each achievement gotten).",

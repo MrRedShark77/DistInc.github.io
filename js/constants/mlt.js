@@ -11,6 +11,9 @@ const MLT_TABS = {
 	compressors: function() {
 		return hasMltMilestone(30);
 	},
+	planck: function() {
+		return player.mlt.planck.unl;
+	},
 };
 
 const MULIVERSE_ENERGY_BASE = 2;

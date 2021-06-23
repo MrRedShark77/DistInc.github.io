@@ -6,6 +6,7 @@ function updateTempMultiverse() {
 	updateMultiverseTabs();
 	updateQuilts();
 	updateCompressors();
+	updatePlanck();
 }
 
 function updateMiscMltStuff() {
@@ -81,6 +82,7 @@ function setMultiverseResetFunction() {
 function updateMultiverseLayer() {
 	tmp.mlt.can = player.distance.gte(DISTANCES.mlt)
 	tmp.mlt.softcap = MLT_ENERGY_SS
+	if (havePlanckLUpgarde(2).gte(1)) tmp.mlt.softcap = tmp.mlt.softcap.mul(PLANCK_UPGS.lengths[2].effect())
 	if (tmp.inf) if (tmp.inf.upgs.has("6;11")) tmp.mlt.softcap = tmp.mlt.softcap.times(10)
 	if (!tmp.mlt.gain) tmp.mlt.gain = function() { 
 		if (player.distance.lt(DISTANCES.mlt)) return new ExpantaNum(0);
@@ -90,6 +92,7 @@ function updateMultiverseLayer() {
 		if (modeActive("hard") && gain.gte(1.5)) gain = gain.div(1.5);
 		if (tmp.ach[185].has && modeActive("extreme")) gain = gain.times(1.2);
 		if (player.achievements.includes(202)) gain = gain.times(42)
+		if (tmp.inf) if (tmp.inf.upgs.has("7;11")) gain = gain.times(INF_UPGS.effects["7;11"]())
 
 		let exp_s = 1/4
 		if (gain.gte(tmp.mlt.softcap)) gain = gain.pow(exp_s).times(ExpantaNum.pow(tmp.mlt.softcap, ExpantaNum.sub(1, exp_s)))
@@ -237,5 +240,9 @@ function mltTick(diff) {
 		player.mlt.energy = player.mlt.energy.add(gain)
 		player.mlt.totalEnergy = player.mlt.totalEnergy.add(gain)
 		if (player.mlt.energy.gt(player.mlt.bestEnergy)) player.mlt.bestEnergy = player.mlt.energy
+	}
+	if (player.mlt.totalEnergy.gte(1e29) && player.distance.gte("4.4e37000000000026") && !player.mlt.planck.unl) player.mlt.planck.unl = true
+	if (player.mlt.planck.unl) {
+		player.mlt.planck.lengths = player.mlt.planck.lengths.add(tmp.mlt.planck.gain.mul(diff))
 	}
 }
