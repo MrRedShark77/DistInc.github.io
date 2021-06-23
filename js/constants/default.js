@@ -260,7 +260,6 @@ const DEFAULT_START = {
 		planck: {
 			unl: false,
 			lengths: new ExpantaNum(0),
-			maxLengths: new ExpantaNum(0),
 			upgrades: {},
 		},
 	},

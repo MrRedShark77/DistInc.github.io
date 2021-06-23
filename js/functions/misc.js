@@ -159,7 +159,6 @@ function ENString(obj) {
 	ret.mlt.totalEnergy = new ExpantaNum(ret.mlt.totalEnergy).toString();
 	for (let i=0;i<Object.keys(ret.mlt.quiltUpgs).length;i++) ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]] = new ExpantaNum(ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]]).toString();
 	ret.mlt.planck.lengths = new ExpantaNum(ret.mlt.planck.lengths).toString()
-	ret.mlt.planck.maxLengths = new ExpantaNum(ret.mlt.planck.maxLengths).toString()
 	return ret;
 }
 
@@ -350,7 +349,6 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	for (let i=0;i<Object.keys(ret.mlt.quiltUpgs).length;i++) ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]] = new ExpantaNum(ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]]);
 	for (let i=0;i<Object.keys(ret.mlt.compressors).length;i++) ret.mlt.compressors[Object.keys(ret.mlt.compressors)[i]] = new ExpantaNum(ret.mlt.compressors[Object.keys(ret.mlt.compressors)[i]]);
 	ret.mlt.planck.lengths = new ExpantaNum(ret.mlt.planck.lengths)
-	ret.mlt.planck.maxLengths = new ExpantaNum(ret.mlt.planck.maxLengths)
 	for (let i=0;i<Object.keys(ret.mlt.planck.upgrades).length;i++){
 		ret.mlt.planck.upgrades[Object.keys(ret.mlt.planck.upgrades)[i]] = new ExpantaNum(ret.mlt.planck.upgrades[Object.keys(ret.mlt.planck.upgrades)[i]])
 	}
