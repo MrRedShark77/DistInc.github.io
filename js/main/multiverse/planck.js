@@ -33,7 +33,7 @@ const PLANCK_UPGS = {
             id: 4,
             desc: "Make Planck lengths gain is boosted by Pathogens.",
             cost(x = havePlanckLUpgarde(this.id)) { return ExpantaNum.pow(2, x.pow(1.25).add(1)).mul(2.5) },
-            effect(x = havePlanckLUpgarde(this.id)) { return player.pathogens.amount.add(1).log10().add(1).log10().pow(1/3).mul(x.pow(1/3)).add(1) },
+            effect(x = havePlanckLUpgarde(this.id)) { return player.pathogens.amount.add(1).log10().add(1).log10().max(0).pow(1/3).mul(x.max(0).pow(1/3)).add(1) },
             effDesc(eff = this.effect()) { return showNum(eff)+'x' },
         },
     }
