@@ -1649,6 +1649,7 @@ function updateOverallMultiverseHTML() {
 function updatePlanckHTML() {
 	if (player.tab == "mlt" && mltTab == "planck") {
 		tmp.el.planckValue.setTxt(showNum(player.mlt.planck.lengths));
+		tmp.el.planckGainBase.setTxt(showNum(tmp.mlt.planck.gainBase));
 		tmp.el.planckGain.setTxt(formatGain(player.mlt.planck.lengths, tmp.mlt.planck.gain, "planck"))
 
 		for (let x = 1; x <= Object.keys(PLANCK_UPGS.lengths).length; x++) if (PLANCK_UPGS.lengths[x] !== undefined) {
