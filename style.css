@@ -222,6 +222,10 @@ body {
 	background-color: #a30b78;
 }
 
+.black {
+	background-color: #000000;
+}
+
 .redTint {
 	filter: sepia(90%) hue-rotate(-45deg) brightness(120%);
 }
@@ -1260,6 +1264,12 @@ table {
 	font-size: 24px;
 }
 
+.hadron {
+	font-weight: bold;
+	color: #346d8f;
+	font-size: 24px;
+}
+
 .gauge {
 	font-weight: bold;
 	color: #cc951f;
@@ -2014,6 +2024,32 @@ table {
 	transform: scale(1.1);
 }
 
+.btn.mlt.planck,
+.btn.planck {
+	background: radial-gradient(white 30%, black 60%);
+	background-position: 50%;
+	animation: planckBg 10s infinite;
+	box-shadow: 3px 4px 0px 0px black;
+	transition-duration: 0s;
+	border-color: black;
+	color: black;
+}
+
+.btn.mlt.planck:active,
+.btn.planck:active {
+	top: 3px;
+	left: 2px;
+	box-shadow: none;
+}
+
+.btn.mlt.planck:hover,
+.btn.planck:hover {
+	filter: brightness(100%);
+	transform: scale(1);
+	background: radial-gradient(lightgrey 30%, black 60%);
+	background-position: 50%;
+}
+
 .btn.mlt.tb.s {
 	font-size: 10px !important;
 	max-width: 100px !important;
@@ -2419,6 +2455,15 @@ table {
 	}
 	100% {
 		background-position: 0% 50%;
+	}
+}
+
+@keyframes planckBg {
+	0%, 100% {
+		background-size: 100% 100%;
+	}
+	50% {
+		background-size: 150% 150%;
 	}
 }
 

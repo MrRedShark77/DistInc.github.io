@@ -283,6 +283,10 @@ function setupHTML() {
 	
 	// Multiverse Stuff
 	setupMltMilestoneTable()
+	for (let x = 1; x <= 3; x++) setupCompsMilestoneTable(x)
+
+	// Planck Stuff
+	setupPlanckTable()
 	
 	// Version
 	let v = new Element("version")

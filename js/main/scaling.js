@@ -81,6 +81,7 @@ function getScalingStart(type, name) {
 				if (tmp.ach[153].has) start = start.plus(TREE_UPGS[7].effect(ExpantaNum.add(player.elementary.theory.tree.upgrades[7]||0, TREE_UPGS[11].effect(player.elementary.theory.tree.upgrades[11]||0))).div(10))
 			}
 			if (player.elementary.foam.unl && tmp.elm ? tmp.elm.qf : false) start = start.plus(tmp.elm.qf.boost10)
+			if (tmp.inf) if (tmp.inf.upgs.has("2;11")) start = start.plus(INF_UPGS.effects["2;11"]())
 		}
 	} else if (name=="enlightenments") {
 		if (type=="scaled") {
@@ -166,6 +167,22 @@ function getScalingPower(type, name) {
 	} else if (name=="endorsements") {
 		if (type=="scaled") {
 			if (tmp.pathogens) power = power.times(ExpantaNum.sub(1, tmp.pathogens[15].eff()))
+		}
+	} else if (name=="spectralGems") {
+		if (type=="superscaled" || type=="scaled") {
+			if (tmp.inf) if (tmp.inf.upgs.has("11;4")) power = power.times(0.5)
+		}
+	} else if (name=="dervBoost") {
+		if (type=="superscaled" || type=="scaled") {
+			if (tmp.inf) if (tmp.inf.upgs.has("11;4")) power = power.times(0.5)
+		}
+	} else if (name=="photons") {
+		if (type == 'scaled') {
+			if (hasCompsMilestone(3,1)) power = power.times(0.1)
+		}
+	} else if (name=="compressors") {
+		if (type == 'scaled') {
+			if (tmp.ach[207].has) power = power.times(0.95)
 		}
 	}
 	if (type=="hyper"&&name!="darkCore") power = power.max(0.5)

@@ -976,6 +976,19 @@ function updateLeptonsHTML(){
 	);
 }
 
+function updateHadronsHTML(){
+	tmp.el.hadronFUnl.changeStyle("visibility", (hasMltMilestone(27)?"visible":"hidden"))
+	tmp.el.hadronsF.setHTML(
+		showNum(player.elementary.fermions.hadrons.amount) + " " + tmp.elm.ferm.hadronName() + " Hadrons"
+	);
+	tmp.el.hadronFGain.setTxt(showNum(adjustGen(tmp.elm.ferm.hadronGain, "heptons")));
+	tmp.el.hadronFRewards.setTooltip(
+		tmp.elm.ferm.hadronName(true) +
+			" Hadrons: " +
+			tmp.elm.ferm.hadronDesc(HADRON_NAMES[player.elementary.fermions.hadrons.type - 1])
+	);
+}
+
 function updateBosonsAmountsHTML(){
 	tmp.el.bosonsamt.setTxt(showNum(player.elementary.bosons.amount));
 	tmp.el.transfer1Bosons.setClasses({
@@ -1236,6 +1249,7 @@ function updateFermionsMainHTML(){
 		updateFermionsHTML()
 		updateQuarksHTML()
 		updateLeptonsHTML()
+		updateHadronsHTML()
 	}
 }
 
@@ -1562,7 +1576,7 @@ function updateOverallMultiverseHTML() {
 		tmp.el.mltReset.setHTML(
 			(player.mlt.times.eq(0)?("You have travelled across the entire multiverse, you must move on."):("Obliterate the multiverse to create <span class='mlttxt'>" +
 			showNum(tmp.mlt.layer.gain) +
-			"</span> Multiversal Energy."))
+			"</span> Multiversal Energy." + (tmp.mlt.layer.gain.gte(tmp.mlt.softcap)?" <span class='sc'>(softcapped)</span>":"")))
 		);
 	}
 	if (player.tab == "mlt") {
@@ -1575,7 +1589,7 @@ function updateOverallMultiverseHTML() {
 			tmp.el.mltReset2.setHTML(
 				(player.mlt.times.eq(0)?("You have travelled across the entire multiverse, you must move on."):("Obliterate the multiverse to create <span class='mlttxt'>" +
 				showNum(tmp.mlt.layer.gain) +
-				"</span> Multiversal Energy."))
+				"</span> Multiversal Energy." + (tmp.mlt.layer.gain.gte(tmp.mlt.softcap)?" <span class='sc'>(softcapped)</span>":"")))
 			);
 		}
 		
@@ -1611,6 +1625,35 @@ function updateOverallMultiverseHTML() {
 			}
 			tmp.el.quilt2Eff2Desc.setTxt(hasMltMilestone(6)?", Pion gain, & Spinor gain":"")
 			tmp.el.quilt3sc.setTxt(tmp.mlt.quilts[3].eff.gte(tmp.mlt.quilts[3].scStart)?" (softcapped)":"")
+			tmp.el.quilt2sc.setTxt(tmp.mlt.quilts[2].eff.gte(tmp.mlt.quilts[2].scStart)?" (softcapped)":"")
+		} else if (mltTab == "compressors") {
+			tmp.el["compressorsValue"].setTxt(showNum(tmp.mlt.compressors))
+			tmp.el["compressorsNext"].setTxt(showNum(tmp.mlt.compressorsNext))
+			tmp.el["unspentComps"].setTxt(showNum(tmp.mlt.haveComps))
+			tmp.el.compsName.setTxt(getScalingName("compressors") + " ");
+			for (let i=1;i<=3;i++) {
+				tmp.el["compsGet"+i].setClasses({btn: true, locked: !canGetCompressors(), mlt: canGetCompressors()})
+				tmp.el["compressors"+i].setTxt(showNum(player.mlt.compressors[i-1]))
+				tmp.el["compressors"+i+'eff'].setTxt(showNum(getCompEffect(i).sub(1).mul(100)))
+				for (let r=1;r<=MLT_COMPS_MIL.lengths[i-1];r++) {
+					tmp.el["comps"+i+"Mil"+r+'1'].changeStyle("background", hasCompsMilestone(i, r)?"rgba(79, 240, 109, 0.4)":"none")
+					tmp.el["comps"+i+"Mil"+r+"desc"].setHTML(MLT_COMPS_MIL[i][r-1].desc);
+					if (tmp.el["comps"+i+"Mil"+r+"effDesc"]) tmp.el["comps"+i+"Mil"+r+"effDesc"].setHTML(MLT_COMPS_MIL[i][r-1].effectDesc())
+				}
+			}
+			tmp.el.comps3sc.setTxt(getCompEffect(3).gte(tmp.mlt.comps3soft)?" (softcapped)":"")
+		}
+	}
+}
+
+function updatePlanckHTML() {
+	if (player.tab == "mlt" && mltTab == "planck") {
+		tmp.el.planckValue.setTxt(showNum(player.mlt.planck.lengths));
+		tmp.el.planckGain.setTxt(formatGain(player.mlt.planck.lengths, tmp.mlt.planck.gain, "planck"))
+
+		for (let x = 1; x <= Object.keys(PLANCK_UPGS.lengths).length; x++) if (PLANCK_UPGS.lengths[x] !== undefined) {
+			tmp.el["planckL"+x].setHTML(PLANCK_UPGS.lengths[x].desc + "<br>Level: " + havePlanckLUpgarde(x) + "<br>Currently: " + PLANCK_UPGS.lengths[x].effDesc() + "<br>Cost: " + showNum(PLANCK_UPGS.lengths[x].cost()) + " Planck lengths")
+			tmp.el["planckL"+x].setClasses({btn: true, locked: player.mlt.planck.lengths.lt(PLANCK_UPGS.lengths[x].cost()), planck: player.mlt.planck.lengths.gte(PLANCK_UPGS.lengths[x].cost())})
 		}
 	}
 }
@@ -1632,6 +1675,7 @@ function updateHTML() {
 	updateOverallElementaryHTML()
 	updateOverallEnergyHTML()
 	updateOverallMultiverseHTML()
+	updatePlanckHTML()
 	updateMiscHTML()
 	
 	// Features

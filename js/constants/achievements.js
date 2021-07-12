@@ -1,5 +1,5 @@
 const ACH_DATA = {
-	rows: 19,
+	rows: 20,
 	cols: 8,
 	names: {
 		11: "Quick Sprint",
@@ -172,6 +172,15 @@ const ACH_DATA = {
 		196: "Hadron Manipulation",
 		197: "Billionaire X",
 		198: "Overlord of Everything",
+
+		201: "Tier is OP",
+		202: "Non-Dimensional Distance",
+		203: "Ow, Infinity!",
+		204: "Go to Megaverse?",
+		205: "The Meta-Infinity",
+		206: "Upgrade Quilts",
+		207: "The Final Challenge",
+		208: "Beyond Multiverse",
 	},
 	descs: {
 		11: "Go at least formatDistance(100).",
@@ -344,6 +353,15 @@ const ACH_DATA = {
 		196: "Reach formatDistance(4.4e10000026) in Multiverse 5 while in a Hadronic Challenge with a Projected Score of at least boolean(extreme,12,15).",
 		197: "Gain showNum(1e9) Multiversal Energy in one reset.",
 		198: "Reach formatDistance(2.8e1000000026643).",
+
+		201: "Reach Tier showNum(166).",
+		202: "Reach formatDistance(2.8e420000026643) without Derivatives shifts & boosts.",
+		203: "Reach formatDistance(4.4e4500000026) while in Reality.",
+		204: "Gain showNum(1e15) Multiversal Energy in one reset.",
+		205: "Reach 200 Endorsements.",
+		206: "Get 3 multiversal compressors.",
+		207: "Get Best Hadronic Score of at least 50.",
+		208: "Reach formatDistance(2.8e40000000026643).",
 	},
 	rewards: {
 		12: "Acceleration is showNum(10)% higherboolean(extreme, and Rank Cheapeners are +0.5x stronger for each achievement gotten).",
@@ -460,5 +478,10 @@ const ACH_DATA = {
 		196: "boolean(extreme+hikers_dream,Useless Theories is boosted by Multiverse Quilt 3's 2nd effect)",
 		197: "Entropy Upgrades are showNum(5)% cheaperboolean(hikers_dream-extreme, and Thrusters V is 12.5% stronger).",
 		198: "Unlock new Hadronic Challenge Selectors, you can extend the Hadronic Challenge goal to your best-ever Distance, and you can extend the HC Theoriverse selector to your best-ever Theoriverse completed (capped at depth 100).",
+
+		201: "Pathogen Upgrades are x1.25 stronger.",
+		202: "Gain showNum(42)x more Multiversal Energy.",
+		203: "Knowledge gain are raised by 1.5.",
+		207: "Scaled Multiversal Compressors scaling is 5% weaker.",
 	}
 };

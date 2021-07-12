@@ -68,7 +68,7 @@ class Feature {
 				: "Reach " +
 						this.display(this.req()) +
 						" " +
-						(this.res == "distance" ? "" : this.dispAmt()) +
+						(this.res == "distance" ? "" : ((this.name == 'multiversal compressors') ? this.resName : this.dispAmt())) +
 						" to unlock " +
 						this.disp +
 						" (" +

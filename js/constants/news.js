@@ -541,4 +541,8 @@ const NEWS_DATA = {
 		"There are more multiverses out there, somewhere... I wonder what sort of chaos is going on over there.",
 		function() { return player.mlt.highestCompleted>=5 },
 	],
+	s41: [
+		"This is not a simulation, this is not fake, the multiverse is going to explode. This is not fake news, YOU are fake news. The multiverse is exploding in 3, 2, 1... FAKE NEWS!!!! YOU ARE FAKE!!! GET REAL HAHAHAHAHAHAH.",
+		function() { return player.mlt.times.gt(0) },
+	],
 };

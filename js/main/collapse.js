@@ -125,5 +125,6 @@ function getCadaverGainMult() {
 	if (tmp.ach[68].has && modeActive("extreme")) mult = mult.times(5);
 	if (tmp.collapse) if (modeActive("easy")) mult = mult.times(3);
 	if (tmp.elm) if (player.elementary.times.gt(0)) mult = mult.times(tmp.elm.ferm.quarkR("down").max(1));
+	if (havePlanckLUpgarde(3).gte(1)) mult = mult.pow(PLANCK_UPGS.lengths[3].effect())
 	return mult
 }

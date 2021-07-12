@@ -1,6 +1,6 @@
 const DEFAULT_START = {
 	tab: "main",
-	version: 2.0,
+	version: 2.1,
 	optionsTab: "saving",
 	achievements: [],
 	savePos: 1,
@@ -137,7 +137,11 @@ const DEFAULT_START = {
 			leptons: {
 				amount: new ExpantaNum(0),
 				type: 1
-			}
+			},
+			hadrons: {
+				amount: new ExpantaNum(0),
+				type: 1
+			},
 		},
 		bosons: {
 			amount: new ExpantaNum(0),
@@ -250,7 +254,13 @@ const DEFAULT_START = {
 		highestUnlocked: 0,
 		active: 0,
 		quiltUpgs: [new ExpantaNum(0), new ExpantaNum(0), new ExpantaNum(0)],
+		compressors: [new ExpantaNum(0), new ExpantaNum(0), new ExpantaNum(0)],
 		mlt1selected: [],
 		mlt3selected: [],
+		planck: {
+			unl: false,
+			lengths: new ExpantaNum(0),
+			upgrades: {},
+		},
 	},
 };

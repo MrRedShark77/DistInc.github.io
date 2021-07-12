@@ -48,6 +48,12 @@ const LEPTON_DESCS = {
 	psi: "Quark gain is faster."
 };
 
+const HADRON_NAMES = ["meson", "baryon"];
+const HADRON_DESCS = {
+	meson: "Quark & Lepton gain is stronger.",
+	baryon: "Quark & Lepton boosts Hadron gain.",
+};
+
 const PHOTON_UPGS = 4;
 const PH_CST_SCLD = {
 	1: function(exp, s) { return ExpantaNum.pow(5, player.elementary.bosons.gauge.photons.upgrades[0].pow(exp).div(s.pow(exp.sub(1))).pow(2)).times(25) },
@@ -1130,8 +1136,8 @@ const SKY_FIELDS = {
 		spinorDesc: "All Pion Upgrades are cheaper.",
 		baseCost: new ExpantaNum(1e20),
 		costMult: new ExpantaNum(1e5),
-		pionEff(bought) { return ExpantaNum.pow(100, bought) },
-		spinorEff(bought) { return ExpantaNum.pow(100, bought) },
+		pionEff(bought) { return ExpantaNum.pow(100, bought).pow(hasCompsMilestone(2,3)?3:1) },
+		spinorEff(bought) { return ExpantaNum.pow(100, bought).pow(hasCompsMilestone(2,3)?3:1) },
 		desc(eff) { return showNum(eff)+"x cheaper" },
 	},
 	9: {

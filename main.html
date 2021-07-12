@@ -35,6 +35,16 @@
 							Quilts
 						</button>
 					</td>
+					<td>
+						<button id="compressorstabbtn" class="btn tb mlt main" onclick="tmp.mlt.showTab('compressors')">
+							Compressors
+						</button>
+					</td>
+					<td>
+						<button id="plancktabbtn" class="btn tb mlt planck main" onclick="tmp.mlt.showTab('planck')">
+							Planck
+						</button>
+					</td>
 				</tr>
 			</table><br>
 		</div>
@@ -71,7 +81,7 @@
 				<div class="flexContainer" style="background-color: rgba(255, 183, 0, 0.4); width: 33%; min-height: 400px;">
 					<div class="mltMinorTitle">Multiversal Quilt II</div>
 					<div>Quilt Strength: <span id="quilt2Strength" class="mlttxt"></span>% (based on Knowledge)</div><br>
-					<div>Makes Endorsements <span id="quilt2Eff" class="mlttxt"></span>% more efficient</div><br>
+					<div>Makes Endorsements <span id="quilt2Eff" class="mlttxt"></span>%<span id="quilt2sc" class="sc dark"></span> more efficient</div><br>
 					<div>Also multiplies Theory Point gain from Theoriverse completions<span id="quilt2Eff2Desc"></span> by <span id="quilt2Eff2" class="mlttxt"></span></div><br><br>
 					<button id="quiltUpg2" class="btn locked" onclick="buyQuiltUpg(2)"></button>
 				</div>
@@ -83,6 +93,39 @@
 					<button id="quiltUpg3" class="btn locked" onclick="buyQuiltUpg(3)"></button>
 				</div>
 			</div>
+		</div>
+		<div id="compressors" class="mlttab">
+			<div><span id="compsName"></span>Multiversal Compressors: <span id='compressorsValue' style="font-size: 25px;"></span> (+1 next at <span id='compressorsNext' style="font-size: 25px;"></span> Total Multiversal Energy)</div>
+			<div>Have <span id='unspentComps' style="font-size: 25px;"></span> unspent Multiversal Compressors.</div>
+			<br>
+			<button class="btn mlt" onclick='respecCompressors()'>Respec Multiversal Compressors</button>
+			<br><br>
+			<div class="flexRow">
+				<div class="flexContainer" style="background-color: rgba(183, 0, 255, 0.4); width: 33%; min-height: 400px;">
+					<div class="mltMinorTitle">Multiversal Compressors I: <span id="compressors1"></span></div>
+					<div>Makes Multiversal Quilt I is <span id="compressors1eff" class="mlttxt"></span>% stronger.</div><br><br>
+					<button id="compsGet1" class="btn locked" onclick="getCompressors(1)">Get Multiversal Compressors I</button><br><br>
+					<div id="comps1MilestoneTable"></div>
+				</div>
+				<div class="flexContainer" style="background-color: rgba(255, 183, 0, 0.4); width: 33%; min-height: 400px;">
+					<div class="mltMinorTitle">Multiversal Compressors II: <span id="compressors2"></span></div>
+					<div>Makes Multiversal Quilt II is <span id="compressors2eff" class="mlttxt"></span>% stronger.</div><br><br>
+					<button id="compsGet2" class="btn locked" onclick="getCompressors(2)">Get Multiversal Compressors II</button><br><br>
+					<div id="comps2MilestoneTable"></div>
+				</div>
+				<div class="flexContainer" style="background-color: rgba(0, 247, 255, 0.4); width: 33%; min-height: 400px;">
+					<div class="mltMinorTitle">Multiversal Compressors III: <span id="compressors3"></span></div>
+					<div>Makes Multiversal Quilt III is <span id="compressors3eff" class="mlttxt"></span>%<span id="comps3sc" class="sc dark"></span> stronger.</div><br><br>
+					<button id="compsGet3" class="btn locked" onclick="getCompressors(3)">Get Multiversal Compressors III</button><br><br>
+					<div id="comps3MilestoneTable"></div>
+				</div>
+			</div>
+		</div>
+		<div id="planck" class="mlttab">
+			<div class="band black">
+				You reduced multiverse in <span id="planckValue" style="font-size: 25px;"></span> <span id="planckGain"></span> planck lengths (based on total multiversal energy)<br>
+			</div><br>
+			<table id="planckTable"></table>
 		</div>
 	</div>
 	<div id="mainContainer" style="display: none">
@@ -1381,6 +1424,14 @@
 						Hover to see current Lepton effect<br />Click to change Lepton Type
 					</button>
 				</div>
+				<div style="width: 50%; min-height: 300px; background-color: #ff391f; float: right; color: black;" id="hadronFUnl">
+					Your Quarks & Leptons are generating you
+					<span id="hadronFGain" class="hadron"></span> Hadrons/sec.<br />
+					You have <span id="hadronsF" class="hadron"></span>.<br /><br />
+					<button id="hadronFRewards" class="btn elm" onclick="tmp.elm.ferm.changeHadron()">
+						Hover to see current Hadron effect<br />Click to change Hadron Type
+					</button>
+				</div>
 			</div>
 			<div id="bosons" class="elmtab" style="display: none;">
 				<br />
@@ -2417,6 +2468,8 @@
 	<script type="text/javascript" src="js/game.js"></script>
 
 	<!-- File Data -->
+	<script type="text/javascript" src="js/main/multiverse/planck.js"></script>
+	<script type="text/javascript" src="js/main/multiverse/compressors.js"></script>
 	<script type="text/javascript" src="js/main/multiverse/quilts.js"></script>
 	<script type="text/javascript" src="js/main/multiverse/mlt.js"></script>
 	<script type="text/javascript" src="js/main/elementary/bosons.js"></script>

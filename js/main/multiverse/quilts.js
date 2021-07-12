@@ -5,6 +5,7 @@ function updateQuilts() {
 		if (!tmp.mlt.quilts[i]) tmp.mlt.quilts[i] = {}
 		tmp.mlt.quilts[i].upgCost = getQuiltUpgCost(i);
 		tmp.mlt.quilts[i].upgPow = upgPower;
+		if (i==2) tmp.mlt.quilts[i].scStart = new ExpantaNum(1e4)
 		if (i==3) tmp.mlt.quilts[i].scStart = new ExpantaNum(3.75)
 		tmp.mlt.quilts[i].upgEff = player.mlt.quiltUpgs[i-1].times(HCCBA("q"+i)?0:1).times(tmp.mlt.quilts[i].upgPow).div(10)
 		tmp.mlt.quilts[i].strength = getQuiltStrength(i).plus(tmp.mlt.quilts[i].upgEff);
@@ -27,6 +28,8 @@ function getQuiltStrength(x) {
 	if (x==1) base = player.distance.max(1).logBase(DISTANCES.mlt);
 	else if (x==2) base = player.inf.knowledge.max(1).logBase("1e8500");
 	else if (x==3) base = player.elementary.particles.max(1).logBase(1e150);
+
+	if (x == 2 && hasMltMilestone(26)) base = base.times(tmp.mlt.mil26reward)
 	
 	if (modeActive("easy")) base = base.pow(1.01).times(1.2);
 	if (modeActive("hard")) base = base.div(1.2);
@@ -40,10 +43,15 @@ function getQuiltEff(x) {
 	let power = tmp.mlt.quilts[x].strength;
 	if (x==1) {
 		let exp = ExpantaNum.root(15, power.plus(1).pow(4).sub(4.0625))
-		return ExpantaNum.pow(ExpantaNum.pow(10, 1e7), power.lt(1)?power.pow(exp):power)
-	} else if (x==2) return power.plus(1).pow(1.1)
+		return ExpantaNum.pow(ExpantaNum.pow(10, 1e7), power.lt(1)?power.pow(exp):power).pow(getCompEffect(1))
+	} else if (x==2) {
+		let eff = power.plus(1).pow(1.1).mul(getCompEffect(2))
+		if (eff.gte(tmp.mlt.quilts[2].scStart)) eff = eff.times(tmp.mlt.quilts[2].scStart.pow(2)).cbrt();
+		return eff
+	}
 	else if (x==3) {
 		let eff = power.plus(1).pow(0.9)
+		eff = eff.mul(getCompEffect(3))
 		if (eff.gte(tmp.mlt.quilts[3].scStart)) eff = eff.times(tmp.mlt.quilts[3].scStart.pow(2)).cbrt();
 		return eff;
 	}
@@ -53,27 +61,40 @@ function getQuilt1Eff2() {
 	let power = tmp.mlt.quilts[1].strength;
 	if (power.gte(8)) power = ExpantaNum.pow(2, power.logBase(2).times(2).sqrt())
 	if (power.gte(2)) power = power.times(4).cbrt();
-	return ExpantaNum.pow(1e4, power.pow(2));
+	return ExpantaNum.pow(1e4, power.pow(2)).pow(getCompEffect(2));
 }
 
 function getQuilt2Eff2() {
 	let power = tmp.mlt.quilts[2].strength;
+	power = power.pow(getCompEffect(2))
 	return power.plus(1).pow(2);
 }
 
 function getQuilt3Eff2() {
 	let power = tmp.mlt.quilts[3].strength;
-	return ExpantaNum.pow(1e5, power);
+	return ExpantaNum.pow(1e5, power).pow(getCompEffect(3));
 }
+
+function getQuiltCostBase() { return hasMltMilestone(28)?tmp.mlt.mil28reward:2 }
 
 function getQuiltUpgCost(x) {
 	let bought = player.mlt.quiltUpgs[x-1]
-	return ExpantaNum.pow(2, bought)
+	return ExpantaNum.pow(getQuiltCostBase(), bought)
 }
 
 function buyQuiltUpg(x) {
 	let cost = getQuiltUpgCost(x)
 	if (player.mlt.energy.lt(cost)) return;
-	player.mlt.energy = player.mlt.energy.sub(cost);
+	if (!hasMltMilestone(29)) player.mlt.energy = player.mlt.energy.sub(cost);
 	player.mlt.quiltUpgs[x-1] = player.mlt.quiltUpgs[x-1].plus(1);
+}
+
+function maxQuilt() {
+	for (let x = 1; x <= 3; x++) if (player.mlt.energy.gte(getQuiltUpgCost(x))) {
+		let base = getQuiltCostBase()
+		let bulk = player.mlt.energy.max(1).logBase(base).floor()
+		let cost = ExpantaNum.pow(base, bulk)
+		if (!hasMltMilestone(29)) player.mlt.energy = player.mlt.energy.sub(cost)
+		player.mlt.quiltUpgs[x-1] = bulk.add(1)
+	}
 }

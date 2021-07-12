@@ -84,6 +84,8 @@ function updateElementaryLayer() {
 		if (tmp.ach[172].has) exp = exp.plus(ExpantaNum.sub(.5, ExpantaNum.div(.5, player.elementary.times.plus(1).logBase(1e3).times(.2).plus(1))))
 		if (gain.gte(tmp.elm.softcap)) gain = gain.pow(exp).times(ExpantaNum.pow(tmp.elm.softcap, ExpantaNum.sub(1, exp)))
 		if (player.elementary.foam.unl && tmp.elm.qf) gain = gain.times(tmp.elm.qf.boost12) // not affected by softcap hehe
+		if (tmp.inf) if (tmp.inf.upgs.has("4;11")) gain = gain.times(INF_UPGS.effects['4;11']())
+		if (hasCompsMilestone(1,1)) gain = gain.times(MLT_COMPS_MIL[1][0].effect())
 	
 		if (modeActive("extreme")) gain = gain.div(3).plus(gain.gte(1)?1:0)
 		return gain.floor();
@@ -214,6 +216,9 @@ function elTick(diff) {
 	);
 	player.elementary.fermions.leptons.amount = new ExpantaNum(player.elementary.fermions.leptons.amount).plus(
 		adjustGen(tmp.elm.ferm.leptonGain, "leptons").times(diff)
+	);
+	player.elementary.fermions.hadrons.amount = new ExpantaNum(player.elementary.fermions.hadrons.amount).plus(
+		adjustGen(tmp.elm.ferm.hadronGain, "hadrons").times(diff)
 	);
 	player.elementary.bosons.gauge.amount = new ExpantaNum(player.elementary.bosons.gauge.amount).plus(
 		adjustGen(tmp.elm.bos.gaugeGain, "gauge").times(diff)

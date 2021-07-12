@@ -59,6 +59,7 @@ function ENString(obj) {
 	ret.elementary.fermions.amount = new ExpantaNum(ret.elementary.fermions.amount).toString();
 	ret.elementary.fermions.quarks.amount = new ExpantaNum(ret.elementary.fermions.quarks.amount).toString();
 	ret.elementary.fermions.leptons.amount = new ExpantaNum(ret.elementary.fermions.leptons.amount).toString();
+	ret.elementary.fermions.hadrons.amount = new ExpantaNum(ret.elementary.fermions.hadrons.amount).toString();
 	ret.elementary.bosons.amount = new ExpantaNum(ret.elementary.bosons.amount).toString();
 	ret.elementary.bosons.gauge.amount = new ExpantaNum(ret.elementary.bosons.gauge.amount).toString();
 	ret.elementary.bosons.gauge.force = new ExpantaNum(ret.elementary.bosons.gauge.force).toString();
@@ -157,6 +158,7 @@ function ENString(obj) {
 	ret.mlt.bestEnergy = new ExpantaNum(ret.mlt.bestEnergy).toString();
 	ret.mlt.totalEnergy = new ExpantaNum(ret.mlt.totalEnergy).toString();
 	for (let i=0;i<Object.keys(ret.mlt.quiltUpgs).length;i++) ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]] = new ExpantaNum(ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]]).toString();
+	ret.mlt.planck.lengths = new ExpantaNum(ret.mlt.planck.lengths).toString()
 	return ret;
 }
 
@@ -179,7 +181,10 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	if (ret.version < 1.8 || !ret.elementary.entropy) ret.elementary.entropy = deepCopy(sc.elementary.entropy);
 	if (ret.version < 1.9 || !ret.elementary.sky) ret.elementary.sky = deepCopy(sc.elementary.sky);
 	if (ret.version < 2.0 || !ret.mlt) ret.mlt = deepCopy(sc.mlt);
+	if (ret.version < 2.1 || !ret.mlt.planck) ret.mlt.planck = deepCopy(sc.mlt.planck);
 	if (ret.version < sc.version) onVersionChange();
+	if (ret.mlt.compressors === undefined) ret.mlt.compressors = deepCopy(sc.mlt.compressors)
+	if (ret.elementary.fermions.hadrons === undefined) ret.elementary.fermions.hadrons = deepCopy(sc.elementary.fermions.hadrons)
 	if (ret.elementary.theory.tree.spent === undefined) ret.elementary.theory.tree.spent = deepCopy(sc.elementary.theory.tree.spent)
 	if (ret.elementary.theory.inflatons === undefined) ret.elementary.theory.inflatons = deepCopy(sc.elementary.theory.inflatons)
 	if (ret.autoModes === undefined) ret.autoModes = {};
@@ -243,6 +248,7 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	ret.elementary.fermions.amount = new ExpantaNum(ret.elementary.fermions.amount);
 	ret.elementary.fermions.quarks.amount = new ExpantaNum(ret.elementary.fermions.quarks.amount);
 	ret.elementary.fermions.leptons.amount = new ExpantaNum(ret.elementary.fermions.leptons.amount);
+	ret.elementary.fermions.hadrons.amount = new ExpantaNum(ret.elementary.fermions.hadrons.amount);
 	ret.elementary.bosons.amount = new ExpantaNum(ret.elementary.bosons.amount);
 	ret.elementary.bosons.gauge.amount = new ExpantaNum(ret.elementary.bosons.gauge.amount);
 	ret.elementary.bosons.gauge.force = new ExpantaNum(ret.elementary.bosons.gauge.force);
@@ -341,6 +347,11 @@ function transformToEN(obj, sc = DEFAULT_START) {
 	ret.mlt.bestEnergy = new ExpantaNum(ret.mlt.bestEnergy);
 	ret.mlt.totalEnergy = new ExpantaNum(ret.mlt.totalEnergy);
 	for (let i=0;i<Object.keys(ret.mlt.quiltUpgs).length;i++) ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]] = new ExpantaNum(ret.mlt.quiltUpgs[Object.keys(ret.mlt.quiltUpgs)[i]]);
+	for (let i=0;i<Object.keys(ret.mlt.compressors).length;i++) ret.mlt.compressors[Object.keys(ret.mlt.compressors)[i]] = new ExpantaNum(ret.mlt.compressors[Object.keys(ret.mlt.compressors)[i]]);
+	ret.mlt.planck.lengths = new ExpantaNum(ret.mlt.planck.lengths)
+	for (let i=0;i<Object.keys(ret.mlt.planck.upgrades).length;i++){
+		ret.mlt.planck.upgrades[Object.keys(ret.mlt.planck.upgrades)[i]] = new ExpantaNum(ret.mlt.planck.upgrades[Object.keys(ret.mlt.planck.upgrades)[i]])
+	}
 	ret.version = Math.max(ret.version, sc.version);
 	return ret;
 }

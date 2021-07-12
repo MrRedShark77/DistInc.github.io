@@ -14,6 +14,7 @@ const SCALING_STARTS = {
 		spectralGems: new ExpantaNum(5),
 		dervBoost: new ExpantaNum(6),
 		photons: new ExpantaNum(15),
+		compressors: new ExpantaNum(6),
 	},
 	superscaled: {
 		rank: new ExpantaNum(100),
@@ -27,7 +28,8 @@ const SCALING_STARTS = {
 		endorsements: new ExpantaNum(50),
 		enlightenments: new ExpantaNum(20),
 		spectralGems: new ExpantaNum(16),
-		dervBoost: new ExpantaNum(14)
+		dervBoost: new ExpantaNum(14),
+		compressors: new ExpantaNum(10),
 	},
 	hyper: {
 		rank: new ExpantaNum(160),
@@ -88,6 +90,9 @@ const SCALING_RES = {
 	photons: function(n = 0) {
 		return player.elementary.bosons.gauge.photons.upgrades[n - 1];
 	},
+	compressors: function (n = 0) {
+		return tmp.mlt ? tmp.mlt.compressors : new ExpantaNum(1 / 0);
+	},
 };
 const MULTI_SCALINGS = ["fn", "pathogenUpg", "enlightenments", "photons"]
 const SCALING_AMTS = {
@@ -112,4 +117,5 @@ const REAL_SCALING_NAMES = {
 	spectralGems: "spectral gems",
 	dervBoost: "derivative boosts",
 	photons: "photon upgrades",
+	compressors: "multiversal compressors",
 }

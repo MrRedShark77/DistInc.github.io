@@ -209,6 +209,16 @@ function checkR19Ach() {
 	if (player.distance.gte("2.8e1000000026643")) tmp.ach[198].grant();
 }
 
+function checkR20Ach() {
+	if (player.tier.gte(166)) tmp.ach[201].grant();
+	if (player.distance.gte("2.8e420000026643") && player.inf.derivatives.unlocks.lte(0)) tmp.ach[202].grant();
+	if (player.distance.gte("4.4e4500000026") && player.inf.stadium.current == 'reality') tmp.ach[203].grant();
+	if (player.inf.endorsements.gte(200)) tmp.ach[205].grant();
+	if (tmp.mlt.compressors.gte(3)) tmp.ach[206].grant();
+	if (player.elementary.hc.best.gte(50)) tmp.ach[207].grant();
+	if (player.distance.gte("2.8e40000000026643")) tmp.ach[208].grant();
+}
+
 function updateAchievements() {
 	tmp.nopathogenupgs = getTotalPathogenUpgrades().eq(0)
 	for (let r=1;r<=ACH_DATA.rows;r++) if (!Achievement.hasRow(r)) window["checkR"+r+"Ach"]();

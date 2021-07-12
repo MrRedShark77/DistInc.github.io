@@ -1,9 +1,16 @@
+function getTierDiv() {
+	let ret = new ExpantaNum(1)
+	if (player.inf.upgrades.includes("11;1")) ret = ret.mul(INF_UPGS.effects["11;1"]().tier)
+	return ret
+}
+
 function updateTempTiers() {
+	let div = getTierDiv()
 	if (!tmp.tiers) tmp.tiers = {};
 	tmp.tiers.fp = getTierFP();
 	tmp.tiers.bc = getTierBaseCost();
-	tmp.tiers.req = new ExpantaNum(tmp.tiers.bc).plus(player.tier.div(tmp.tiers.fp).pow(2));
-	tmp.tiers.bulk = player.rank.sub(tmp.tiers.bc).max(0).sqrt().times(tmp.tiers.fp).add(1).round();
+	tmp.tiers.req = new ExpantaNum(tmp.tiers.bc).plus(player.tier.div(div).div(tmp.tiers.fp).pow(2));
+	tmp.tiers.bulk = player.rank.sub(tmp.tiers.bc).max(0).sqrt().times(tmp.tiers.fp).times(div).add(1).round();
 	if (scalingActive("tier", player.tier.max(tmp.tiers.bulk), "scaled")) {
 		let start = getScalingStart("scaled", "tier");
 		let power = getScalingPower("scaled", "tier");
@@ -13,6 +20,7 @@ function updateTempTiers() {
 				.pow(exp)
 				.div(start.pow(exp.sub(1)))
 				.div(tmp.tiers.fp)
+				.div(div)
 				.pow(2)
 		);
 		tmp.tiers.bulk = player.rank
@@ -20,6 +28,7 @@ function updateTempTiers() {
 			.max(0)
 			.sqrt()
 			.times(tmp.tiers.fp)
+			.times(div)
 			.times(start.pow(exp.sub(1)))
 			.pow(exp.pow(-1))
 			.add(1)
@@ -39,6 +48,7 @@ function updateTempTiers() {
 				.pow(exp)
 				.div(start.pow(exp.sub(1)))
 				.div(tmp.tiers.fp)
+				.div(div)
 				.pow(2)
 		);
 		tmp.tiers.bulk = player.rank
@@ -46,6 +56,7 @@ function updateTempTiers() {
 			.max(0)
 			.sqrt()
 			.times(tmp.tiers.fp)
+			.times(div)
 			.times(start.pow(exp.sub(1)))
 			.pow(exp.pow(-1))
 			.times(start2.pow(exp2.sub(1)))
@@ -71,6 +82,7 @@ function updateTempTiers() {
 				.pow(exp)
 				.div(start.pow(exp.sub(1)))
 				.div(tmp.tiers.fp)
+				.div(div)
 				.pow(2)
 		);
 		tmp.tiers.bulk = player.rank
@@ -78,6 +90,7 @@ function updateTempTiers() {
 			.max(0)
 			.sqrt()
 			.times(tmp.tiers.fp)
+			.times(div)
 			.times(start.pow(exp.sub(1)))
 			.pow(exp.pow(-1))
 			.times(start2.pow(exp2.sub(1)))
@@ -116,6 +129,7 @@ function updateTempTiers() {
 				.pow(exp)
 				.div(start.pow(exp.sub(1)))
 				.div(tmp.tiers.fp)
+				.div(div)
 				.pow(2)
 		);
 		tmp.tiers.bulk = player.rank
@@ -123,6 +137,7 @@ function updateTempTiers() {
 			.max(0)
 			.sqrt()
 			.times(tmp.tiers.fp)
+			.times(div)
 			.times(start.pow(exp.sub(1)))
 			.pow(exp.pow(-1))
 			.times(start2.pow(exp2.sub(1)))
